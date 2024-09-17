@@ -377,6 +377,73 @@ h6{
               }
             }
           }
+          &.sunrise-set{
+            .circle-box{
+              margin-top: 82px;
+              .circle-out{
+                width: 100%;
+                height: 100%;
+                border: dashed 2px rgba(255,255,255,.2);
+                border-bottom:0;
+              }
+              .circle-in{
+                .circle{
+                  border:dashed 2px $yellow;
+                  border-bottom:0;
+                  position: relative;
+                  &:before{
+                    content:"";
+                    position: absolute;
+                    bottom: -4px;
+                    right: -10px;
+                    width: 20px;
+                    height: 20px;
+                    background: url(../images/sun-notch-ico.svg) no-repeat center center/18px;
+                    transform: rotate(23deg);
+                  } 
+                }
+                
+              }
+            }
+            .sun-details{
+              width: 100%;
+              display: flex;
+              justify-content: center;
+              border-top: solid 1px rgba(255,255,255,0.19);
+              .sun-box{
+                width: 269px;
+                height: auto;
+                position: relative;
+                &:before, &:after{
+                  content: "";
+                  position: absolute;
+                  top: -2px;
+                  width: 13px;
+                  height: 4px;
+                  border-radius: 5px;
+                  background: $yellow;
+                }
+                &:before{
+                  left: 1px;
+                }
+                &:after{
+                  right: 1px;
+                }
+                .sun-time{
+                  margin-top: 6px;
+                  span{
+                    display: block;
+                    @include setFont($poppins, 10px, 400);
+                    color: $yellow;
+                    margin-top: 3px;
+                  }
+                  p{
+                    @include setFont($poppins, 14px, 400);
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
