@@ -445,6 +445,33 @@ h6{
             }
           }
         }
+        &.short{
+          min-height: auto;
+          h5{
+            padding: 0 !important;
+          }
+        }
+        .highlight-value{
+          p{
+            @include setFont($oswald, 40px, 300);
+            line-height: 43px;
+            margin-bottom: 0;
+          }
+          em{
+            font-style: normal;
+            @include setFont($poppins, 16px, 300);
+            display: inline-block;
+            margin-left: 5px;
+            opacity: .5;
+          }
+          span{
+            @include setFont($oswald, 20px, 300);
+            color: #fff;
+            opacity: .5;
+            display:inline-block;
+            margin-left:2px;
+          }
+        }
       }
     }
   }
