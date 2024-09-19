@@ -14,7 +14,7 @@ header{
     }
     nav {
       overflow: hidden;
-      background-color: #333;
+      // background-color: #333;
       position: fixed;
       top: 0;
       width: 100%;
@@ -33,9 +33,10 @@ header{
             text-decoration: none;
             padding: 14px;
             &:hover {
-              background-color: #111;
-            }
+              background-color: #8134DF;
+              border-radius: 50px;
           }
+        }
         }
       }
     }

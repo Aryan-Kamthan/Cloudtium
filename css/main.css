@@ -14,7 +14,6 @@ header .navigator {
 }
 header nav {
   overflow: hidden;
-  background-color: #333;
   position: fixed;
   top: 0;
   width: 100%;
@@ -37,7 +36,8 @@ header nav ul li a {
   padding: 14px;
 }
 header nav ul li a:hover {
-  background-color: #111;
+  background-color: #8134DF;
+  border-radius: 50px;
 }
 header .content {
   text-align: center;
