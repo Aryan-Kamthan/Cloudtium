@@ -85,12 +85,12 @@
                                     </div>
                                 </div>
                                 <div class="air-quality">
-                                    <label for="">Air Quality</label>
-                                    <p class="mb-0 d-flex align-items-center"><span class="air-color me-2" style="background: #f2eb0e"></span>40</p>
+                                    <label for="">Air Quality<span class="air-color me-2" id="airColor"></span></label>
+                                     <p class="mb-0 d-flex align-items-center" id="airQuality">----</p> 
                                 </div>  
                             </div>
-                            <div class="weather-type pt-2">
-                                <img src="images/weather-icon/thunderstorm-rain.svg" height="35px">
+                            <div class="22-type pt-2 weather-type">
+                                <img src="images/weather-icon/thunderstorm-rain.svg" height="35px" >
                                 Thunderstorm with heavy rain
                             </div>
                             <div class="air-quality-vals">
@@ -101,36 +101,43 @@
                                             <span class="color"></span>
                                             <span class="value-type">Good</span>
                                         </div>
-                                        <span class="index-value">0-20</span>
+                                        <span class="index-value">0-50</span>
                                     </div>
                                     <div class="col-sm-6 indexes d-flex justify-content-between">
                                         <div>
                                             <span class="color"></span>
-                                            <span class="value-type">Fair</span>
+                                            <span class="value-type">Satisfactory</span>
                                         </div>
-                                        <span class="index-value">20-80</span>
+                                        <span class="index-value">51-100</span>
                                     </div>
                                     <div class="col-sm-6 indexes d-flex justify-content-between">
                                         <div>
                                             <span class="color"></span>
                                             <span class="value-type">Moderate</span>
                                         </div>
-                                        <span class="index-value">80-250</span>
+                                        <span class="index-value">101-200</span>
                                     </div>  
                                     <div class="col-sm-6 indexes d-flex justify-content-between">
                                         <div>
                                             <span class="color"></span>
                                             <span class="value-type">Poor</span>
                                         </div>
-                                        <span class="index-value">250-350</span>
+                                        <span class="index-value">201-300</span>
                                     </div>  
                                     <div class="col-sm-6 indexes d-flex justify-content-between">
                                         <div>
                                             <span class="color"></span>
                                             <span class="value-type">Vey Poor</span>
                                         </div>
-                                        <span class="index-value">350-500</span>
-                                    </div>                               
+                                        <span class="index-value">301-400</span>
+                                    </div>
+                                    <div class="col-sm-6 indexes d-flex justify-content-between">
+                                        <div>
+                                            <span class="color"></span>
+                                            <span class="value-type">Severe</span>
+                                        </div>
+                                        <span class="index-value">401-500</span>
+                                    </div>                                   
                                 </div>
                             </div>
                         </div>
@@ -173,8 +180,8 @@
                                                             <span>12</span>
                                                         </div>
                                                     </div>
-                                                    <div class="circle-in">
-                                                        <div id="bar" class="circle" style="transform: rotate(-120deg);"></div>
+                                                    <div class="circle-in" id="uvIndexProjection">
+                                        
                                                     </div>
                                                 </div>
                                                 <div class="uv-value comman-value d-flex justify-content-center text-center p-0">
@@ -191,7 +198,7 @@
                                                     <div class="circle-out">
                                                         
                                                     </div>
-                                                    <div class="circle-in">
+                                                    <div class="circle-in" id="sunrisesetProjection">
                                                         <div id="bar" class="circle" style="transform: rotate(-120deg);"></div>
                                                     </div>
                                                 </div>
