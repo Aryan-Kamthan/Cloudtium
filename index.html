@@ -23,6 +23,17 @@
     <div class="wrapper">
         <div class="container-fluid ">
             <header>
+                <div class="modal fade" tabindex="-1" id="searchModal">
+                    <div class="modal-dialog modal-md">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          <div id="search-result">Modal body text goes here.</div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                </div>
+
                 <div class='navigator'>
 
                     <div id="navigation-bar">
@@ -48,7 +59,7 @@
                     <div class="col-lg-6 d-flex align-items-center">
                         <div class="city">
                             <img src="images/marker-ico.svg" alt="Pin">
-                            <span>Indore, </span><em>IN</em>
+                            <span> </span>, <em></em>
                         </div>
                         <div class="search flex-grow-1">
                             <img src="images/search-ico.svg" alt="search bar">
@@ -263,252 +274,8 @@
                         <h6 id="forecast1">5 Days Forecast</h6>
                         <div class="main-content forcast">
                             <img src="images/forcast-bg.png" alt="" class="main-image">
-                            <div class="row g-2">
-                                <div class="col-xl col-sm-4 col-6">
-                                    <div class="forcast-box">
-                                        <div class="weather-icon">
-                                            <div class="weather-img">
-                                                <img src="images/weather-icon/clear-sky.svg" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="date-time">
-                                            <p>19 Sept</p>
-                                            <span>Thursday</span>
-                                        </div>
-                                        <div class="temp d-flex justify-content-center align-items-end">
-                                            <div class="max-temp">
-                                                <p class="mb-0">27.8°</p>
-                                            </div>
-                                            <div class="min-temp">
-                                                <p class="mb-0">/ 23.3°</p>
-                                            </div>
-                                        </div>
-                                        <div class="highlights">
-                                            <div class="row g-0">
-                                                <div class="col-7 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/humidity-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">25 <em>%</em></p>
-                                                </div>
-                                                <div class="col-5 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/feels-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">30°</p>
-                                                </div>
-                                                <div class="col-7 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/wind-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">25 <em> km/h</em></p> 
-                                                </div>
-                                                <div class="col-5 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/visibility-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">3<em>km</em></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl col-sm-4 col-6">
-                                    <div class="forcast-box">
-                                        <div class="weather-icon">
-                                            <div class="weather-img">
-                                                <img src="images/weather-icon/clear-sky.svg" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="date-time">
-                                            <p>19 Sept</p>
-                                            <span>Thursday</span>
-                                        </div>
-                                        <div class="temp d-flex justify-content-center align-items-end">
-                                            <div class="max-temp">
-                                                <p class="mb-0">27.8°</p>
-                                            </div>
-                                            <div class="min-temp">
-                                                <p class="mb-0">/ 23.3°</p>
-                                            </div>
-                                        </div>
-                                        <div class="highlights">
-                                            <div class="row g-0">
-                                                <div class="col-7 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/humidity-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">25 <em>%</em></p>
-                                                </div>
-                                                <div class="col-5 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/feels-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">30°</p>
-                                                </div>
-                                                <div class="col-7 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/wind-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">25 <em>km/h</em></p>
-                                                </div>
-                                                <div class="col-5 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/visibility-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">3<em>km</em></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl col-sm-4 col-6">
-                                    <div class="forcast-box">
-                                        <div class="weather-icon d-flex justify-content-center">
-                                            <div class="weather-img">
-                                                <img src="images/weather-icon/clear-sky.svg" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="date-time">
-                                            <p>19 Sept</p>
-                                            <span>Thursday</span>
-                                        </div>
-                                        <div class="temp d-flex justify-content-center align-items-end">
-                                            <div class="max-temp">
-                                                <p class="mb-0">27.8°</p>
-                                            </div>
-                                            <div class="min-temp">
-                                                <p class="mb-0">/ 23.3°</p>
-                                            </div>
-                                        </div>
-                                        <div class="highlights">
-                                            <div class="row g-0">
-                                                <div class="col-7 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/humidity-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">25 <em>%</em></p>
-                                                </div>
-                                                <div class="col-5 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/feels-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">30°</p>
-                                                </div>
-                                                <div class="col-7 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/wind-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">25 <em>km/h</em></p>
-                                                </div>
-                                                <div class="col-5 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/visibility-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">3<em>km</em></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl col-sm-4 col-6">
-                                    <div class="forcast-box">
-                                        <div class="weather-icon">
-                                            <div class="weather-img">
-                                                <img src="images/weather-icon/clear-sky.svg" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="date-time">
-                                            <p>19 Sept</p>
-                                            <span>Thursday</span>
-                                        </div>
-                                        <div class="temp d-flex justify-content-center align-items-end">
-                                            <div class="max-temp">
-                                                <p class="mb-0">27.8°</p>
-                                            </div>
-                                            <div class="min-temp">
-                                                <p class="mb-0">/ 23.3°</p>
-                                            </div>
-                                        </div>
-                                        <div class="highlights">
-                                            <div class="row g-0">
-                                                <div class="col-7 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/humidity-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">25 <em>%</em></p>
-                                                </div>
-                                                <div class="col-5 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/feels-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">30°</p>
-                                                </div>
-                                                <div class="col-7 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/wind-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">25 <em>km/h</em></p>
-                                                </div>
-                                                <div class="col-5 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/visibility-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">3<em>km</em></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl col-sm-4 col-6">
-                                    <div class="forcast-box">
-                                        <div class="weather-icon">
-                                            <div class="weather-img">
-                                                <img src="images/weather-icon/clear-sky.svg" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="date-time">
-                                            <p>19 Sept</p>
-                                            <span>Thursday</span>
-                                        </div>
-                                        <div class="temp d-flex justify-content-center align-items-end">
-                                            <div class="max-temp">
-                                                <p class="mb-0">27.8°</p>
-                                            </div>
-                                            <div class="min-temp">
-                                                <p class="mb-0">/ 23.3°</p>
-                                            </div>
-                                        </div>
-                                        <div class="highlights">
-                                            <div class="row g-0">
-                                                <div class="col-7 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/humidity-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">25 <em>%</em></p>
-                                                </div>
-                                                <div class="col-5 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/feels-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">30°</p>
-                                                </div>
-                                                <div class="col-7 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/wind-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">25 <em>km/h</em></p>
-                                                </div>
-                                                <div class="col-5 highlights-text d-flex align-items-center">
-                                                    <div>
-                                                        <img src="images/forcast/visibility-ico.svg" alt="">
-                                                    </div>
-                                                    <p class="mb-0">3<em>km</em></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="row g-2" id="forecast">
+                                
                             </div>
                         </div>
                         

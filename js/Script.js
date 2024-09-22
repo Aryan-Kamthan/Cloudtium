@@ -2,12 +2,80 @@ const APIKey = '9f2fabf5bd00bd2a4d092cd7c6b4c73d';
 // apiURL1 = `https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}`
 // apiURL2 = `https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}`
 // apiURL3 = `http://api.openweathermap.org/data/2.5/air_pollution?lat={lat}&lon={lon}&appid={API key}`
+// apiURL4 = `http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}`
 const part = 'hourly,daily,minutely'
+
+
+
+function displayCityInfo(data){
+    $("#search-result").html('');
+    $('#searchModal').modal('show');
+
+    data.forEach(city =>{
+        let cityDiv = document.createElement('div');
+        cityDiv.classList.add('çity-info');
+        cityDiv.innerHTML = `
+            <h3>${city.name}, ${city.country}</h3>
+            <p>Latitude : ${city.lat}</p>
+            <p>Longitude : ${city.lon}</p>
+            <hr />
+            `;
+        
+        cityDiv.addEventListener("click",() => {
+            $('#searchModal').modal('hide');
+            lat = city.lat;
+            lon = city.lon;
+            apiURL1 = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=${part}&appid=${APIKey}`;
+            apiURL2 = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKey}`;
+            apiURL3 = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${APIKey}`;
+
+            Promise.all([
+                fetch(apiURL1).then(response=>response.json()),
+                fetch(apiURL2).then(response=>response.json()),
+                fetch(apiURL3).then(response=>response.json()),
+            ])
+            .then(([weatherData, forecastData, airPollutionData])=>{
+                console.log("weather:",weatherData);
+                console.log("forecast:",forecastData);
+                console.log("airpollutin:",airPollutionData);
+
+                displayWeatherData(weatherData);
+                displayAirData(airPollutionData);
+                displayForecast(forecastData);
+            })
+            .catch(error=>{
+                window.alert(error);
+            });
+        });
+        $("#search-result").append(cityDiv);
+    });
+    
+}
+
+function searchByCityName(){
+    var cityname = $("#search-city").val();
+    const geoLocationAPI = `http://api.openweathermap.org/geo/1.0/direct?q=${cityname}&limit=5&appid=${APIKey}`;
+    fetch(geoLocationAPI)
+    .then(response => response.json())
+    .then(data =>{
+        displayCityInfo(data);
+    })
+    .catch(err =>{
+        window.alert(err)
+    });
+}
 
 $(document).ready(function(){
     clock();
     fetchWeatherData();
+    $("#search-city").keypress(function(event){
+        if(event.keyCode === 13){
+            searchByCityName();
+        }
+    });
 });
+
+
 
 function convertUnixto12H(timestamp){
     const date = new Date(timestamp * 1000);
@@ -202,14 +270,78 @@ function displayAirData(airData){
 function displayForecast(data){
     let cityname = data.city.name;
     let countryname = data.city.country;
-    // console.log("cityname", cityname);
-    // console.log("country", countryname);
     $(".city span").text(cityname);
     $(".city em").text(countryname);
+    
+    $("#forecast").html(``);
+    for(let i = 7; i < data.list.length; i+=8)
+    {
+        let forecast = data.list[i];
+        console.log("8fore:", forecast);
+        let date = new Date(forecast.dt * 1000);
+        const dayOfWeeks = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][date.getDay()];
+        let month = date.toLocaleDateString('default',{month:'long'});
+        let dayOfMonth = date.getDate();
+        let icon = forecast.weather[0].icon;
+        let weatherIcon = getImage(icon);
 
-    // for(let i = 0; i < data.list.length; i+=8)
-    // {
+        let temp_max = (Number(forecast.main.temp_max) -273.15).toFixed(0);
+        let temp_min = (Number(forecast.main.temp_min) -273.15).toFixed(0);
 
-    // }
+        let humidity = forecast.main.humidity;
+        let feelsLike = (Number(forecast.main.feels_like) -273.15).toFixed(0);
+        let windSpeed = Math.round(forecast.wind.speed);
+        let visible = (Number(forecast.visibility)/1000).toFixed(0);
+
+        $("#forecast").append(` <div class="col-xl col-sm-4 col-6">
+                                    <div class="forcast-box">
+                                        <div class="weather-icon">
+                                            <div class="weather-img">
+                                                <img src="images/weather-icon/${weatherIcon}" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="date-time">
+                                            <p>${dayOfMonth} ${month}</p>
+                                            <span>${dayOfWeeks}</span>
+                                        </div>
+                                        <div class="temp d-flex justify-content-center align-items-end">
+                                            <div class="max-temp">
+                                                <p class="mb-0">${temp_max}°</p>
+                                            </div>
+                                            <div class="min-temp">
+                                                <p class="mb-0">/ ${temp_min}°</p>
+                                            </div>
+                                        </div>
+                                        <div class="highlights">
+                                            <div class="row g-0">
+                                                <div class="col-7 highlights-text d-flex align-items-center">
+                                                    <div>
+                                                        <img src="images/forcast/humidity-ico.svg" alt="">
+                                                    </div>
+                                                    <p class="mb-0">${humidity} <em>%</em></p>
+                                                </div>
+                                                <div class="col-5 highlights-text d-flex align-items-center">
+                                                    <div>
+                                                        <img src="images/forcast/feels-ico.svg" alt="">
+                                                    </div>
+                                                    <p class="mb-0">${feelsLike}°</p>
+                                                </div>
+                                                <div class="col-7 highlights-text d-flex align-items-center">
+                                                    <div>
+                                                        <img src="images/forcast/wind-ico.svg" alt="">
+                                                    </div>
+                                                    <p class="mb-0">${windSpeed} <em> km/h</em></p> 
+                                                </div>
+                                                <div class="col-5 highlights-text d-flex align-items-center">
+                                                    <div>
+                                                        <img src="images/forcast/visibility-ico.svg" alt="">
+                                                    </div>
+                                                    <p class="mb-0">${visible}<em>km</em></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`);
+    }
 
 }
