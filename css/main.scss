@@ -556,4 +556,76 @@ h6{
       }
     }
   }
+  &.history{
+    .history-box{
+      background: transparent;
+      backdrop-filter: blur(50px);
+      background-color: rgba(0,0,0,.2);
+      border-radius: 14px;
+      .weather-icon{
+        padding: 20px;
+        .weather-img{
+          height: 100px;
+          width: auto;
+          display: flex;
+          justify-content: center;
+          img{
+            height: 100%;
+          }
+        }
+      }
+      .date-time{
+        text-align: center;
+        p{
+          @include setFont($poppins, 16px, 300);
+          margin-bottom: 0px;
+        }
+        span{
+          @include setFont($poppins, 12px, 300);
+          opacity: .5;
+          text-transform: uppercase;
+        }
+      }
+      .temp{
+        padding: 20px 0;
+        p{
+          @include setFont($oswald, 30px, 300);
+          margin-bottom: 0;
+          line-height: 32px;
+        }
+        .min-temp{
+          p{
+            @include setFont($oswald, 16px, 300);
+            line-height: 18px;
+            opacity: 0.5;
+          }
+        }
+      }
+      .highlights{
+        border-top: solid 1px rgba(255,255,255,0.2);
+        padding: 20px;
+        .highlights-text{
+          position: relative;
+          div{
+            width: 18px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 5px;
+          }
+          p{
+            @include setFont($oswald, 19px, 300);
+            em{
+              font-style: normal;
+              opacity: .5;
+              @include setFont($poppins, 10px, 300);
+              display: inline-block;
+              margin-left: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
 }

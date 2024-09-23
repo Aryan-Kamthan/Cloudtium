@@ -5,6 +5,13 @@ const APIKey = '9f2fabf5bd00bd2a4d092cd7c6b4c73d';
 // apiURL4 = `http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}`
 const part = 'hourly,daily,minutely'
 
+            const options = {
+                method: 'GET',
+                headers: {
+                    'x-rapidapi-key': 'b89d5b922bmshd0c701d311cd7b3p1251a4jsnfbc9f09360b4',
+                    'x-rapidapi-host': 'weatherapi-com.p.rapidapi.com'
+                }
+            };
 
 
 function displayCityInfo(data){
@@ -13,7 +20,7 @@ function displayCityInfo(data){
 
     data.forEach(city =>{
         let cityDiv = document.createElement('div');
-        cityDiv.classList.add('çity-info');
+        cityDiv.classList.add('city-info');
         cityDiv.innerHTML = `
             <h3>${city.name}, ${city.country}</h3>
             <p>Latitude : ${city.lat}</p>
@@ -23,25 +30,44 @@ function displayCityInfo(data){
         
         cityDiv.addEventListener("click",() => {
             $('#searchModal').modal('hide');
-            lat = city.lat;
-            lon = city.lon;
+            let lat = city.lat;
+            let lon = city.lon;
+            let apiURL1
+            let apiURL2;
+            let apiURL3;
+            var cityname = $("#search-city").val();
+            var today = new Date();
+            var startDate = new Date(new Date().setDate(today.getDate() - 5));
+            let begin = startDate.toISOString().split('T')[0];
+            var endDate = new Date(new Date().setDate(today.getDate() - 1));
+            let end = endDate.toISOString().split('T')[0];
+
+
+
             apiURL1 = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=${part}&appid=${APIKey}`;
             apiURL2 = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKey}`;
             apiURL3 = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${APIKey}`;
+            const url = `https://weatherapi-com.p.rapidapi.com/history.json?q=${cityname}&lang=en&dt=${begin}&end_dt=${end}`;
+           
 
             Promise.all([
                 fetch(apiURL1).then(response=>response.json()),
                 fetch(apiURL2).then(response=>response.json()),
                 fetch(apiURL3).then(response=>response.json()),
+                fetch(url, options).then(response=>response.json()),
+                
             ])
-            .then(([weatherData, forecastData, airPollutionData])=>{
+            .then(([weatherData, forecastData, airPollutionData, historyData])=>{
                 console.log("weather:",weatherData);
                 console.log("forecast:",forecastData);
                 console.log("airpollutin:",airPollutionData);
+                console.log("Search_history:", historyData);
+                
 
                 displayWeatherData(weatherData);
                 displayAirData(airPollutionData);
                 displayForecast(forecastData);
+                displayHistory(historyData);
             })
             .catch(error=>{
                 window.alert(error);
@@ -169,27 +195,42 @@ function fetchWeatherData(){
             console.log("position:",position);
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
+            let apiURL1;
+            let apiURL2;
+            let apiURL3;
+            var today = new Date();
+            var startDate = new Date(new Date().setDate(today.getDate() - 5));
+            let begin = startDate.toISOString().split('T')[0];
+            var endDate = new Date(new Date().setDate(today.getDate() - 1));
+            let end = endDate.toISOString().split('T')[0];
 
             apiURL1 = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=${part}&appid=${APIKey}`;
             apiURL2 = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKey}`;
             apiURL3 = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${APIKey}`;
+            const url = `https://weatherapi-com.p.rapidapi.com/history.json?q=Indore&lang=en&dt=${begin}&end_dt=${end}`;
+            
 
             Promise.all([
                 fetch(apiURL1).then(response=>response.json()),
                 fetch(apiURL2).then(response=>response.json()),
                 fetch(apiURL3).then(response=>response.json()),
+                fetch(url, options).then(response=>response.json()),
+                
             ])
-            .then(([weatherData, forecastData, airPollutionData])=>{
+            .then(([weatherData, forecastData, airPollutionData, historyData])=>{
                 console.log("weather:",weatherData);
                 console.log("forecast:",forecastData);
                 console.log("airpollutin:",airPollutionData);
+                console.log("history:",historyData);
 
                 displayWeatherData(weatherData);
                 displayAirData(airPollutionData);
                 displayForecast(forecastData);
+                displayHistory(historyData);
+
             })
             .catch(error=>{
-                window.alert(error);
+                console.error(error);
             });
         
 
@@ -244,17 +285,17 @@ function displayWeatherData(weatherData){
 
     let degPerHour = 180/Number(difference);
 
-    currentTime = new Date(Date.now()); // Time When we are looking into projection.
-    currentSunDifferences = currentTime.getHours() - sunriseHours;
+    let currentTime = new Date(Date.now()); // Time When we are looking into projection.
+    let currentSunDifferences = currentTime.getHours() - sunriseHours;
 
-    angle = ((currentSunDifferences * degPerHour)- 180);
-    angleSun = angle < 0 ? angle : 0;
+    let angle = ((currentSunDifferences * degPerHour)- 180);
+    let angleSun = angle < 0 ? angle : 0;
     $(".sunrise").text(convertUnixto12H(sunrise));
     $(".sunset").text(convertUnixto12H(sunset));
     $("#sunrisesetProjection").html(`<div id="bar" class="circle" style="transform: rotate(${angleSun}deg);"></div>`)
 // Sun Section end
 
-    $(".windspeed").html(`${Number(weatherData.current.wind_speed)} <em>km/h</em>`);
+    $(".windspeed").html(`${(Number(weatherData.current.wind_speed) *1.609).toFixed(1)} <em>km/h</em>`);
     
 
 }
@@ -277,7 +318,7 @@ function displayForecast(data){
     for(let i = 7; i < data.list.length; i+=8)
     {
         let forecast = data.list[i];
-        console.log("8fore:", forecast);
+        // console.log("8fore:", forecast);
         let date = new Date(forecast.dt * 1000);
         const dayOfWeeks = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][date.getDay()];
         let month = date.toLocaleDateString('default',{month:'long'});
@@ -290,7 +331,7 @@ function displayForecast(data){
 
         let humidity = forecast.main.humidity;
         let feelsLike = (Number(forecast.main.feels_like) -273.15).toFixed(0);
-        let windSpeed = Math.round(forecast.wind.speed);
+        let windSpeed = (Number(forecast.wind.speed * 1.60)).toFixed(1);
         let visible = (Number(forecast.visibility)/1000).toFixed(0);
 
         $("#forecast").append(` <div class="col-xl col-sm-4 col-6">
@@ -300,7 +341,7 @@ function displayForecast(data){
                                                 <img src="images/weather-icon/${weatherIcon}" alt="">
                                             </div>
                                         </div>
-                                        <div class="date-time">
+                                        <div class="date-time" style="text-align: center;">
                                             <p>${dayOfMonth} ${month}</p>
                                             <span>${dayOfWeeks}</span>
                                         </div>
@@ -344,4 +385,73 @@ function displayForecast(data){
                                 </div>`);
     }
 
+}
+
+function displayHistory(data){
+
+    $("#history").html(``);
+    for(let i = 0; i <data.forecast.forecastday.length; i++)
+    {
+        let history = data.forecast.forecastday[i];
+        // console.log("HISSS:",history);
+        let date = new Date(history.date_epoch * 1000);
+        const dayOfWeeks = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][date.getDay()];
+        let month = date.toLocaleDateString('default',{month:'long'});
+        let dayOfMonth = date.getDate();
+        let icon = history.day.condition.icon;
+        // let weatherIcon = getImage(icon);
+
+        let temp_max = (Number(history.day.maxtemp_c)).toFixed(0);
+        let temp_min = (Number(history.day.mintemp_c)).toFixed(0);
+
+        let humidity = history.day.avghumidity;
+        // let feelsLike = (Number(forecast.main.feels_like) -273.15).toFixed(0);
+        let windSpeed = (Number(history.day.maxwind_kph)).toFixed(1);
+        let visible = (Number(history.day.avgvis_km)).toFixed(0);
+
+
+        $("#history").append(` <div class="col-xl col-sm-4 col-6">
+            <div class="history-box">
+                <div class="weather-icon">
+                    <div class="weather-img">
+                        <img src="images/weather-icon/${icon}" alt="">
+                    </div>
+                </div>
+                <div class="date-time">
+                    <p>${dayOfMonth} ${month}</p>
+                    <span>${dayOfWeeks}</span>
+                </div>
+                <div class="temp d-flex justify-content-center align-items-end">
+                    <div class="max-temp">
+                        <p class="mb-0">${temp_max}°</p>
+                    </div>
+                    <div class="min-temp">
+                        <p class="mb-0">/ ${temp_min}°</p>
+                    </div>
+                </div>
+                <div class="highlights">
+                    <div class="row g-0">
+                        <div class="col-7 highlights-text d-flex align-items-center">
+                            <div>
+                                <img src="images/forcast/humidity-ico.svg" alt="">
+                            </div>
+                            <p class="mb-0">${humidity} <em>%</em></p>
+                        </div>
+                        <div class="col-7 highlights-text d-flex align-items-center">
+                            <div>
+                                <img src="images/forcast/wind-ico.svg" alt="">
+                            </div>
+                            <p class="mb-0">${windSpeed} <em> km/h</em></p> 
+                        </div>
+                        <div class="col-5 highlights-text d-flex align-items-center">
+                            <div>
+                                <img src="images/forcast/visibility-ico.svg" alt="">
+                            </div>
+                            <p class="mb-0">${visible}<em>km</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`);
+    }
 }
