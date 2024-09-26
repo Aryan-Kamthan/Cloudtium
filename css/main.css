@@ -1,6 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap");
 body {
   background: #060c19;
+  height: 100%;
+}
+body .cp-text {
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 1px rgba(255, 255, 255, 0.1);
+  text-align: center;
+  padding: 5%;
 }
 
 header {
@@ -34,6 +41,13 @@ header nav ul li a {
   color: #f2f2f2;
   text-decoration: none;
   padding: 5px;
+}
+header nav ul li a img {
+  width: auto;
+  height: 50px;
+  float: left;
+  margin-left: 15px;
+  border-radius: 2px;
 }
 header nav ul li a:hover {
   background-color: #8134DF;
@@ -77,6 +91,9 @@ header .search .form-control {
   padding-left: 67px;
 }
 
+.main-wrapper {
+  height: 100%;
+}
 .main-wrapper .main-image {
   position: absolute;
   -o-object-fit: cover;
@@ -115,7 +132,7 @@ header .search .form-control {
 }
 .current-weather .search-date p span, .current-weather .search-date p em {
   display: inline-block;
-  font-family: "Poppins, sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: 13px;
   font-weight: 300;
   font-style: normal;
@@ -131,34 +148,34 @@ header .search .form-control {
 .current-weather .weather-icon img {
   height: 100%;
 }
-.current-weather weather-temp {
-  font-family: "Oswald, sans-serif";
+.current-weather .weather-temp {
+  font-family: "Oswald", sans-serif;
   font-size: 70px;
   font-weight: 300;
   position: relative;
   padding-right: 36px;
 }
-.current-weather weather-temp p {
+.current-weather .weather-temp p {
   line-height: 68px;
 }
-.current-weather weather-temp div {
+.current-weather .weather-temp div {
   display: flex;
 }
-.current-weather weather-temp div em {
+.current-weather .weather-temp div em {
   font-style: normal;
-  font-family: "Poppins, sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: 21px;
   font-weight: 300;
   line-height: 42px;
 }
-.current-weather weather-temp div span {
-  font-family: "Oswald, sans-serif";
+.current-weather .weather-temp div span {
+  font-family: "Oswald", sans-serif;
   font-size: 32px;
   font-weight: 300;
   margin-left: 3px;
 }
 .current-weather .air-quality label {
-  font-family: "Poppins, sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-weight: 300;
 }
@@ -170,7 +187,7 @@ header .search .form-control {
   margin-left: 2px;
 }
 .current-weather .air-quality p {
-  font-family: "Oswald, sans-serif";
+  font-family: "Oswald", sans-serif;
   font-size: 30px;
   font-weight: 300;
   line-height: 31px;
@@ -182,7 +199,7 @@ header .search .form-control {
   border-top: solid 1px rgba(255, 255, 255, 0.3);
   padding-top: 25px;
   padding-bottom: 12px;
-  font-family: "Poppins, sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: 12px;
   font-weight: 300;
 }
@@ -257,7 +274,7 @@ h6 {
   border-radius: 14px;
 }
 .main-content.highlight .highlight-box .highlight-content h5 {
-  font-family: "Poppins, sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-weight: 300;
   padding: 25px 0 0 25px;
@@ -267,7 +284,7 @@ h6 {
   margin-top: 15px;
 }
 .main-content.highlight .highlight-box .highlight-content .common-value {
-  font-family: "Oswald, sans-serif";
+  font-family: "Oswald", sans-serif;
   font-size: 70px;
   font-weight: 300;
   position: relative;
@@ -280,7 +297,7 @@ h6 {
 .main-content.highlight .highlight-box .highlight-content .common-value p em {
   opacity: 0.5;
   font-style: normal;
-  font-family: "Poppins, sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: 21px;
   font-weight: 300;
 }
@@ -307,7 +324,7 @@ h6 {
   bottom: 0;
 }
 .main-content.highlight .highlight-box .highlight-content .uv-index .circle-box .circle-out .text {
-  font-family: "Poppins, sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: 12px;
   font-weight: 300;
   opacity: 0.3;
@@ -396,6 +413,11 @@ h6 {
   background: url(../images/sun-notch-ico.svg) no-repeat center center/18px;
   transform: rotate(23deg);
 }
+.main-content.highlight .highlight-box .highlight-content .uv-index.sunrise-set #dynamicText {
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+}
 .main-content.highlight .highlight-box .highlight-content .uv-index.sunrise-set .sun-details {
   width: 100%;
   display: flex;
@@ -407,34 +429,19 @@ h6 {
   height: auto;
   position: relative;
 }
-.main-content.highlight .highlight-box .highlight-content .uv-index.sunrise-set .sun-details .sun-box:before, .main-content.highlight .highlight-box .highlight-content .uv-index.sunrise-set .sun-details .sun-box:after {
-  content: "";
-  position: absolute;
-  top: -2px;
-  width: 13px;
-  height: 4px;
-  border-radius: 5px;
-  background: #ffe100;
-}
-.main-content.highlight .highlight-box .highlight-content .uv-index.sunrise-set .sun-details .sun-box:before {
-  left: 1px;
-}
-.main-content.highlight .highlight-box .highlight-content .uv-index.sunrise-set .sun-details .sun-box:after {
-  right: 1px;
-}
 .main-content.highlight .highlight-box .highlight-content .uv-index.sunrise-set .sun-details .sun-box .sun-time {
   margin-top: 6px;
 }
 .main-content.highlight .highlight-box .highlight-content .uv-index.sunrise-set .sun-details .sun-box .sun-time span {
   display: block;
-  font-family: "Poppins, sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: 10px;
   font-weight: 400;
   color: #ffe100;
   margin-top: 3px;
 }
 .main-content.highlight .highlight-box .highlight-content .uv-index.sunrise-set .sun-details .sun-box .sun-time p {
-  font-family: "Poppins, sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-weight: 400;
 }
@@ -445,7 +452,7 @@ h6 {
   padding: 0 !important;
 }
 .main-content.highlight .highlight-box .highlight-content .highlight-value p {
-  font-family: "Oswald, sans-serif";
+  font-family: "Oswald", sans-serif;
   font-size: 40px;
   font-weight: 300;
   line-height: 43px;
@@ -453,7 +460,7 @@ h6 {
 }
 .main-content.highlight .highlight-box .highlight-content .highlight-value em {
   font-style: normal;
-  font-family: "Poppins, sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-weight: 300;
   display: inline-block;
@@ -461,7 +468,7 @@ h6 {
   opacity: 0.5;
 }
 .main-content.highlight .highlight-box .highlight-content .highlight-value span {
-  font-family: "Oswald, sans-serif";
+  font-family: "Oswald", sans-serif;
   font-size: 20px;
   font-weight: 300;
   color: #fff;
@@ -488,17 +495,23 @@ h6 {
 .main-content.forcast .forcast-box .weather-icon .weather-img img {
   height: 100%;
 }
+.main-content.forcast .forcast-box .weather-desc p {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 3px;
+}
 .main-content.forcast .forcast-box .date-time {
   text-align: center;
 }
 .main-content.forcast .forcast-box .date-time p {
-  font-family: "Poppins, sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-weight: 300;
   margin-bottom: 0px;
 }
 .main-content.forcast .forcast-box .date-time span {
-  font-family: "Poppins, sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: 12px;
   font-weight: 300;
   opacity: 0.5;
@@ -507,15 +520,15 @@ h6 {
 .main-content.forcast .forcast-box .temp {
   padding: 20px 0;
 }
-.main-content.forcast .forcast-box .temp p {
-  font-family: "Oswald, sans-serif";
+.main-content.forcast .forcast-box .temp .max-temp {
+  font-family: "Oswald", sans-serif;
   font-size: 30px;
   font-weight: 300;
   margin-bottom: 0;
   line-height: 32px;
 }
-.main-content.forcast .forcast-box .temp .min-temp p {
-  font-family: "Oswald, sans-serif";
+.main-content.forcast .forcast-box .temp .max-temp em {
+  font-family: "Oswald", sans-serif;
   font-size: 16px;
   font-weight: 300;
   line-height: 18px;
@@ -537,14 +550,14 @@ h6 {
   margin-right: 5px;
 }
 .main-content.forcast .forcast-box .highlights .highlights-text p {
-  font-family: "Oswald, sans-serif";
+  font-family: "Oswald", sans-serif;
   font-size: 19px;
   font-weight: 300;
 }
 .main-content.forcast .forcast-box .highlights .highlights-text p em {
   font-style: normal;
   opacity: 0.5;
-  font-family: "Poppins, sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: 10px;
   font-weight: 300;
   display: inline-block;
@@ -573,14 +586,14 @@ h6 {
   text-align: center;
 }
 .main-content.history .history-box .date-time p {
-  font-family: "Poppins, sans-serif";
-  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
   font-weight: 300;
   margin-bottom: 0px;
 }
 .main-content.history .history-box .date-time span {
-  font-family: "Poppins, sans-serif";
-  font-size: 12px;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
   font-weight: 300;
   opacity: 0.5;
   text-transform: uppercase;
@@ -589,18 +602,25 @@ h6 {
   padding: 20px 0;
 }
 .main-content.history .history-box .temp p {
-  font-family: "Oswald, sans-serif";
+  font-family: "Oswald", sans-serif;
   font-size: 30px;
   font-weight: 300;
   margin-bottom: 0;
   line-height: 32px;
 }
 .main-content.history .history-box .temp .min-temp p {
-  font-family: "Oswald, sans-serif";
+  font-family: "Oswald", sans-serif;
   font-size: 16px;
   font-weight: 300;
   line-height: 18px;
   opacity: 0.5;
+}
+.main-content.history .history-box .weather-type p {
+  font-family: "Oswald", sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+  opacity: 0.9;
+  line-height: 28px;
 }
 .main-content.history .history-box .highlights {
   border-top: solid 1px rgba(255, 255, 255, 0.2);
@@ -618,16 +638,123 @@ h6 {
   margin-right: 5px;
 }
 .main-content.history .history-box .highlights .highlights-text p {
-  font-family: "Oswald, sans-serif";
+  font-family: "Oswald", sans-serif;
   font-size: 19px;
   font-weight: 300;
 }
 .main-content.history .history-box .highlights .highlights-text p em {
   font-style: normal;
   opacity: 0.5;
-  font-family: "Poppins, sans-serif";
+  font-family: "Poppins", sans-serif;
   font-size: 10px;
   font-weight: 300;
   display: inline-block;
   margin-left: 5px;
-}/*# sourceMappingURL=main.css.map */
+}
+
+
+.container {
+  margin: 0 auto;
+  padding: 4rem;
+  width: 100%;
+}
+
+.accordion .accordion-item {
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #38142c;
+}
+
+.accordion .accordion-item button[aria-expanded='true'] {
+  border-bottom: 1px solid #03b5d2;
+}
+
+.accordion button {
+  position: relative;
+  display: block;
+  text-align: left;
+  width: 100%;
+  padding: 1em 0;
+  color: #7288a2;
+  font-size: 1.15rem;
+  font-weight: 400;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.accordion button:hover,
+.accordion button:focus {
+  cursor: pointer;
+  color: #03b5d2;
+}
+
+.accordion button:hover::after,
+.accordion button:focus::after {
+  cursor: pointer;
+  color: #03b5d2;
+  border: 1px solid #03b5d2;
+}
+
+.accordion button .accordion-title {
+  padding: 1em 1.5em 1em 0;
+}
+
+.accordion button .icon {
+  display: inline-block;
+  position: absolute;
+  top: 18px;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  border: 1px solid;
+  border-radius: 22px;
+}
+
+.accordion button .icon::before {
+  display: block;
+  position: absolute;
+  content: '';
+  top: 9px;
+  left: 5px;
+  width: 10px;
+  height: 2px;
+  background: currentColor;
+}
+.accordion button .icon::after {
+  display: block;
+  position: absolute;
+  content: '';
+  top: 5px;
+  left: 9px;
+  width: 2px;
+  height: 10px;
+  background: currentColor;
+}
+
+.accordion button[aria-expanded='true'] {
+  color: #03b5d2;
+}
+.accordion button[aria-expanded='true'] .icon::after {
+  width: 0;
+}
+.accordion button[aria-expanded='true'] + .accordion-content {
+  opacity: 1;
+  max-height: 9em;
+  transition: all 200ms linear;
+  will-change: opacity, max-height;
+}
+.accordion .accordion-content {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 200ms linear, max-height 200ms linear;
+  will-change: opacity, max-height;
+}
+.accordion .accordion-content p {
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 2em 0;
+  color: #fff;
+}
+
+/*# sourceMappingURL=main.css.map */

@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Weather APP</title>
+        <title>Cloudium</title>
+        <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -20,282 +21,372 @@
     </head>
 
     <body>
-    <div class="wrapper">
-        <div class="container-fluid ">
-            <header>
-                <div class="modal fade" tabindex="-1" id="searchModal">
-                    <div class="modal-dialog modal-md">
-                      <div class="modal-content">
-                        <div class="modal-body">
-                          <div id="search-result"></div>
+        <div class="wrapper">
+            <div class="container-fluid ">
+                    <header>
+                        <div class="modal fade" tabindex="-1" id="searchModal">
+                            <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                <div id="search-result"></div>
+                                </div>
+                                
+                            </div>
+                            </div>
                         </div>
+
+                        <div class='navigator'>
+
+                            <div id="navigation-bar">
+                            <nav>
+                                <ul>
+                                <li><a href="https://www.fusiongbs.com" id="logo" target="_blank"><img src="images/image__1_-removebg-preview.png" alt="" ></a></li>
+                                <li><a href=#city-dashboard class="hov">City Dashboard</a></li>
+                                <li><a href=#forecast1 class="hov">Forecastor</a></li>
+                                <li><a href=#history1 class="hov">Historical Data</a></li>
+                                <li><a href=#faq class="hov">FAQ</a></li>
+                                <li><a href="https://www.fusiongbs.com/about-us/" target="_blank" class="hov">About</a></li>
+                                <a href="#" id="menu-icon"></a>
+                                </ul>
+                            </nav>
+                            </div>
                         
-                      </div>
-                    </div>
-                </div>
-
-                <div class='navigator'>
-
-                    <div id="navigation-bar">
-                      <nav>
-                        <ul>
-                          <li><a href="#" id="logo">LOGO</a></li>
-                          <li><a href=#city-dashboard>City Dashboard</a></li>
-                          <li><a href=#forecast1>Forecastor</a></li>
-                          <li><a href=#history1>Historical Data</a></li>
-                          <li><a href=#faq>FAQ</a></li>
-                          <li><a href="https://www.fusiongbs.com/about-us/" target="_blank">About</a></li>
-                          <a href="#" id="menu-icon"></a>
-                        </ul>
-                      </nav>
-                    </div>
-                  
-                    <div class='content'>
-                      
-                    </div>
-                  
-                </div>
-                <div class="row justify-content-center align-items-center" style="margin-top: 45px;">
-                    <div class="col-lg-6 d-flex align-items-center">
-                        <div class="city">
-                            <img src="images/marker-ico.svg" alt="Pin">
-                            <span> </span>, <em></em>
-                        </div>
-                        <div class="search flex-grow-1">
-                            <img src="images/search-ico.svg" alt="search bar">
-                            <input type="search" name="search-city" id="search-city" class="form-control" placeholder="Search City...">
-                        </div>
-                    </div>
-                </div>
-            </header>
-            <div class="main-wrapper">
-                <div class="row g-4" id="city-dashboard">
-                    <div class="col-lg-4">
-                        <div class="current-weather">
-                            <img src="images/main-weather-bg.png" alt="" class="main-image">
-                            <div class="search-date text-center">
-                                <p>
-                                    <span class="day me-2">
-                                        Sunday
-                                    </span>
-                                    <em class="me-2 currentDate">16 May, 2024</em>
-                                    <span class="time">12:05 PM</span>
-                                </p>
-                            </div>
-                            <div class="d-flex justify-content-center py-4">
-                                <div class="weather-icon text-center p-0">
-                                    <img src="images/weather-icon/thunderstorm-rain.svg" alt="">
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center pb-3">
-                                <div class="weather-temp d-flex align-items-start">
-                                    <p>28</p>
-                                    <div>
-                                        <em>°</em>
-                                        <span>C</span>
-                                    </div>
-                                </div>
-                                <div class="air-quality">
-                                    <label for="">Air Quality<span class="air-color me-2" id="airColor"></span></label>
-                                     <p class="mb-0 d-flex align-items-center" id="airQuality">----</p> 
-                                </div>  
-                            </div>
-                            <div class="22-type pt-2 weather-type">
-                                <img src="images/weather-icon/thunderstorm-rain.svg" height="35px" >
-                                Thunderstorm with heavy rain
-                            </div>
-                            <div class="air-quality-vals">
-                                <p>Air Quality Index Values</p>
-                                <div class="row">
-                                    <div class="col-sm-6 indexes d-flex justify-content-between">
-                                        <div>
-                                            <span class="color"></span>
-                                            <span class="value-type">Good</span>
-                                        </div>
-                                        <span class="index-value">0-50</span>
-                                    </div>
-                                    <div class="col-sm-6 indexes d-flex justify-content-between">
-                                        <div>
-                                            <span class="color"></span>
-                                            <span class="value-type">Satisfactory</span>
-                                        </div>
-                                        <span class="index-value">51-100</span>
-                                    </div>
-                                    <div class="col-sm-6 indexes d-flex justify-content-between">
-                                        <div>
-                                            <span class="color"></span>
-                                            <span class="value-type">Moderate</span>
-                                        </div>
-                                        <span class="index-value">101-200</span>
-                                    </div>  
-                                    <div class="col-sm-6 indexes d-flex justify-content-between">
-                                        <div>
-                                            <span class="color"></span>
-                                            <span class="value-type">Poor</span>
-                                        </div>
-                                        <span class="index-value">201-300</span>
-                                    </div>  
-                                    <div class="col-sm-6 indexes d-flex justify-content-between">
-                                        <div>
-                                            <span class="color"></span>
-                                            <span class="value-type">Vey Poor</span>
-                                        </div>
-                                        <span class="index-value">301-400</span>
-                                    </div>
-                                    <div class="col-sm-6 indexes d-flex justify-content-between">
-                                        <div>
-                                            <span class="color"></span>
-                                            <span class="value-type">Severe</span>
-                                        </div>
-                                        <span class="index-value">401-500</span>
-                                    </div>                                   
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="main-content highlight">
-                            <img src="images/highlight-bg.png" alt="" class="main-image">
-                            <h6>Today's Highlight</h6>
-                            <div class="highlight-box">
-                                <div class="row g-3">
-                                    <div class="col-xl-4">
-                                        <div class="highlight-content">
-                                            <h5>Wind Status</h5>
-                                            <div style="margin-top: 100px;">
-                                                <img src="images/wind-icon.png" class="img-fluid" alt="">
-                                                <div class="text-center">
-                                                    <div class="wind-type">
-                                                       -----
-                                                    </div>
-                                                    <div class="comman-value">
-                                                        <p class="windspeed">---- <em>km/h</em></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <div class="highlight-content">
-                                            <h5>UV Index</h5>
-                                            <div class="uv-index d-flex justify-content-center flex-column align-items-center">
-                                                <div class="circle-box">
-                                                    <div class="circle-out">
-                                                        <div class="text">
-                                                            <span>0</span>
-                                                            <span>2</span>
-                                                            <span>4</span>
-                                                            <span>6</span>
-                                                            <span>8</span>
-                                                            <span>10</span>
-                                                            <span>12</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="circle-in" id="uvIndexProjection">
-                                        
-                                                    </div>
-                                                </div>
-                                                <div class="uv-value comman-value d-flex justify-content-center text-center p-0">
-                                                    <p class="mb-0 uvindex">---.-- <em>UV</em></p>
-                                                </div>
-                                            </div> 
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <div class="highlight-content">
-                                            <h5>Sunrise & Sunset</h5>
-                                            <div class="uv-index sunrise-set d-flex justify-content-center flex-column align-items-center">
-                                                <div class="circle-box">
-                                                    <div class="circle-out">
-                                                        
-                                                    </div>
-                                                    <div class="circle-in" id="sunrisesetProjection">
-                                                        <div id="bar" class="circle" style="transform: rotate(-120deg);"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="sun-details">
-                                                    <div class="sun-box d-flex justify-content-between">
-                                                        <div class="sun-time text-start">
-                                                            <img src="images/sunrise.svg" alt="">
-                                                            <span>Sunrise</span>
-                                                            <p class="mb-0 sunrise">----</p>
-                                                        </div>
-
-                                                        <div class="sun-time text-end">
-                                                            <img src="images/sunset.svg" alt="">
-                                                            <span>Sunset</span>
-                                                            <p class="mb-0 sunset">----</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <div class="highlight-content short p-4 pb-3">
-                                            <h5>Humidity</h5>
-                                            <div class="highlight-value d-flex justify-content-between">
-                                                <p class="humidity">---- <em>%</em></p>
-                                                <img src="images/humidity-ico.svg" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <div class="highlight-content short p-4 pb-3">
-                                            <h5>Visiblity</h5>
-                                            <div class="highlight-value d-flex justify-content-between">
-                                                <p class="visibility">---- <em>km</em></p>
-                                                <img src="images/visibility-ico.svg" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4">
-                                        <div class="highlight-content short p-4 pb-3">
-                                            <h5>Feels like</h5>
-                                            <div class="highlight-value d-flex justify-content-between">
-                                                <div class="d-flex align-items-start">
-                                                    <p class="feelslike">---- </p>
-                                                    <em>°</em>
-                                                    <span>C</span>
-                                                </div>
-                                                <img src="images/feels-ico.svg" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class='content'>
                             
+                            </div>
+                        
                         </div>
-                    </div>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col-lg-8" style="width:100%;">
-                        <h6 id="forecast1">5 Days Forecast</h6>
-                        <div class="main-content forcast">
-                            <img src="images/forcast-bg.png" alt="" class="main-image">
-                            <div class="row g-2" id="forecast">
-                                
+                        <div class="row justify-content-center align-items-center" style="margin-top: 45px;">
+                            <div class="col-lg-6 d-flex align-items-center">
+                                <div class="city">
+                                    <img src="images/marker-ico.svg" alt="Pin">
+                                    <span> </span>, <em></em>
+                                </div>
+                                <div class="search flex-grow-1">
+                                    <img src="images/search-ico.svg" alt="search bar">
+                                    <input type="search" name="search-city" id="search-city" class="form-control" placeholder="Search City...">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </header>
+                    <div class="main-wrapper">
+                        <div class="row g-4" id="city-dashboard">
+                            <div class="col-lg-4">
+                                <div class="current-weather" style="margin-bottom: 20px;">
+                                    <img src="images/main-weather-bg.png" alt="" class="main-image">
+                                    <!-- <div class="search-date text-center">
+                                        <p>
+                                            <span class="day me-2">
+                                                Sunday
+                                            </span>
+                                            <em class="me-2 currentDate">16 May, 2024</em>
+                                            <span class="time">12:05 PM</span>
+                                        </p>
+                                    </div> -->
+                                    <div class="d-flex justify-content-center py-4">
+                                        <div class="weather-icon text-center p-0" style="margin-bottom: 20px;">
+                                            <img src="images/weather-icon/thunderstorm-rain.svg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center pb-3">
+                                        <div class="weather-temp d-flex align-items-start">
+                                            <p>28</p>
+                                            <div>
+                                                <em>°</em>
+                                                <span>C</span>
+                                            </div>
+                                        </div>
+                                        <div class="air-quality" style="margin-top: 20px;">
+                                            <label for="">Air Quality<span class="air-color me-2" id="airColor"></span></label>
+                                            <p class="mb-0 d-flex align-items-center" id="airQuality">----</p> 
+                                        </div>  
+                                    </div>
+                                    <div class="22-type pt-2 weather-type">
+                                        <img src="images/weather-icon/thunderstorm-rain.svg" height="35px" >
+                                        Thunderstorm with heavy rain
+                                    </div>
+                                    <div class="air-quality-vals">
+                                        <p>Air Quality Index Values</p>
+                                        <div class="row">
+                                            <div class="col-sm-6 indexes d-flex justify-content-between">
+                                                <div>
+                                                    <span class="color"></span>
+                                                    <span class="value-type">Good</span>
+                                                </div>
+                                                <span class="index-value">0-50</span>
+                                            </div>
+                                            <div class="col-sm-6 indexes d-flex justify-content-between">
+                                                <div>
+                                                    <span class="color"></span>
+                                                    <span class="value-type">Satisfactory</span>
+                                                </div>
+                                                <span class="index-value">51-100</span>
+                                            </div>
+                                            <div class="col-sm-6 indexes d-flex justify-content-between">
+                                                <div>
+                                                    <span class="color"></span>
+                                                    <span class="value-type">Moderate</span>
+                                                </div>
+                                                <span class="index-value">101-200</span>
+                                            </div>  
+                                            <div class="col-sm-6 indexes d-flex justify-content-between">
+                                                <div>
+                                                    <span class="color"></span>
+                                                    <span class="value-type">Poor</span>
+                                                </div>
+                                                <span class="index-value">201-300</span>
+                                            </div>  
+                                            <div class="col-sm-6 indexes d-flex justify-content-between">
+                                                <div>
+                                                    <span class="color"></span>
+                                                    <span class="value-type">Vey Poor</span>
+                                                </div>
+                                                <span class="index-value">301-400</span>
+                                            </div>
+                                            <div class="col-sm-6 indexes d-flex justify-content-between">
+                                                <div>
+                                                    <span class="color"></span>
+                                                    <span class="value-type">Severe</span>
+                                                </div>
+                                                <span class="index-value">401-500</span>
+                                            </div>                                   
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="main-content highlight">
+                                    <img src="images/highlight-bg.png" alt="" class="main-image">
+                                    <h6>Today's Highlight</h6>
+                                    <div class="highlight-box">
+                                        <div class="row g-3">
+                                            <div class="col-xl-4">
+                                                <div class="highlight-content">
+                                                    <h5>Wind Status</h5>
+                                                    <div style="margin-top: 100px;">
+                                                        <img src="images/wind-icon.png" class="img-fluid" alt="">
+                                                        <div class="text-center">
+                                                            <div class="wind-type">
+                                                            -----
+                                                            </div>
+                                                            <div class="comman-value">
+                                                                <p class="windspeed">---- <em>km/h</em></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4">
+                                                <div class="highlight-content">
+                                                    <h5>UV Index</h5>
+                                                    <div class="uv-index d-flex justify-content-center flex-column align-items-center">
+                                                        <div class="circle-box">
+                                                            <div class="circle-out">
+                                                                <div class="text">
+                                                                    <span>0</span>
+                                                                    <span>2</span>
+                                                                    <span>4</span>
+                                                                    <span>6</span>
+                                                                    <span>8</span>
+                                                                    <span>10</span>
+                                                                    <span>12</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="circle-in" id="uvIndexProjection">
+                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="uv-value comman-value text-center p-0">
+                                                            <p class="mb-0 uvindex">---.-- <em>UV</em></p>
+                                                            <br>
+                                                            <div id="dynamicText" style="opacity: 0.7; font-size: 13px;">
+                                                                <p> UV index approches zero at night.</p>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4">
+                                                <div class="highlight-content" style="width: fit-content;"> 
+                                                    <h5>Sunrise & Sunset</h5>
+                                                    <div class="uv-index sunrise-set d-flex justify-content-center flex-column align-items-center ">
+                                                        <div class="circle-box" >
+                                                            <div class="circle-out">
+                                                                
+                                                            </div>
+                                                            <div class="circle-in" id="sunrisesetProjection">
+                                                                <div id="bar" class="circle" style="transform: rotate(-120deg);"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="sun-details">
+                                                            <div class="sun-box d-flex justify-content-between">
+                                                                <div class="sun-time text-start">
+                                                                    <img src="images/sunrise.svg" alt="">
+                                                                    <span>Sunrise</span>
+                                                                    <p class="mb-0 sunrise">----</p>
+                                                                </div>
 
-                <div class="row mt-4">
-                    <div class="col-lg-8" style="width:100%;">
-                        <h6 id="history1">5 Days History</h6>
-                        <div class="main-content history">
-                            <img src="images/forcast-bg.png" alt="" class="main-image">
-                            <div class="row g-2" id="history">
-                                
+                                                                <div class="sun-time text-end">
+                                                                    <img src="images/sunset.svg" alt="">
+                                                                    <span>Sunset</span>
+                                                                    <p class="mb-0 sunset">----</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4">
+                                                <div class="highlight-content short p-4 pb-3">
+                                                    <h5>Humidity</h5>
+                                                    <div class="highlight-value d-flex justify-content-between">
+                                                        <p class="humidity">---- <em>%</em></p>
+                                                        <img src="images/humidity-ico.svg" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4">
+                                                <div class="highlight-content short p-4 pb-3">
+                                                    <h5>Visiblity</h5>
+                                                    <div class="highlight-value d-flex justify-content-between">
+                                                        <p class="visibility">---- <em>km</em></p>
+                                                        <img src="images/visibility-ico.svg" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4">
+                                                <div class="highlight-content short p-4 pb-3">
+                                                    <h5>Feels like</h5>
+                                                    <div class="highlight-value d-flex justify-content-between">
+                                                        <div class="d-flex align-items-start">
+                                                            <p class="feelslike">---- </p>
+                                                            <em>°</em>
+                                                            <span>C</span>
+                                                        </div>
+                                                        <img src="images/feels-ico.svg" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
                             </div>
                         </div>
+
+                        <div class="row mt-4">
+                            <div class="col-lg-8" style="width:100%;">
+                                <div class="main-content forcast">
+                                    <img src="images/forcast-bg.png" alt="" class="main-image">
+                                    <h6 id="forecast1" style="text-align: end;">5 Days Forecast</h6>
+                                    <div class="row g-2" id="forecast">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-lg-8" style="width:100%;">
+                                <div class="main-content history">
+                                    <img src="images/forcast-bg.png" alt="" class="main-image">
+                                    <h6 id="history1" style="text-align: end;">5 Days History</h6>
+                                        <div class="row g-2" id="history">
+                                                
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-lg-8" style="width:100%;">
+                                <div class="main-content FAQ">
+                                    <img src="images/forcast-bg.png" alt="" class="main-image">
+                                    <h6 id="FAQ1" style="text-align: end;">Frequently Asked Questions</h6>
+                                        <div class="row g-2" id="faq">
+                                            <div class="container">
+                                                <h2>Frequently Asked Questions</h2>
+                                                <div class="accordion">
+                                                <div class="accordion-item">
+                                                    <button id="accordion-button-1" aria-expanded="false">
+                                                    <span class="accordion-title">What is Air Quality index?</span>
+                                                    <span class="icon" aria-hidden="true"></span>
+                                                    </button>
+                                                    <div class="accordion-content">
+                                                    <p>
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                                        incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut.
+                                                        Ut tortor pretium viverra suspendisse potenti.
+                                                    </p>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <button id="accordion-button-2" aria-expanded="false">
+                                                    <span class="accordion-title">What is the composition in Air?</span>
+                                                    <span class="icon" aria-hidden="true"></span>
+                                                    </button>
+                                                    <div class="accordion-content">
+                                                    <p>
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                                        incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut.
+                                                        Ut tortor pretium viverra suspendisse potenti.
+                                                    </p>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <button id="accordion-button-3" aria-expanded="false">
+                                                    <span class="accordion-title">Will we ever discover aliens?</span>
+                                                    <span class="icon" aria-hidden="true"></span>
+                                                    </button>
+                                                    <div class="accordion-content">
+                                                    <p>
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                                        incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut.
+                                                        Ut tortor pretium viverra suspendisse potenti.
+                                                    </p>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <button id="accordion-button-4" aria-expanded="false">
+                                                    <span class="accordion-title">How much does the Earth weigh?</span>
+                                                    <span class="icon" aria-hidden="true"></span>
+                                                    </button>
+                                                    <div class="accordion-content">
+                                                    <p>
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                                        incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut.
+                                                        Ut tortor pretium viverra suspendisse potenti.
+                                                    </p>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <button id="accordion-button-5" aria-expanded="false">
+                                                    <span class="accordion-title">How do airplanes stay up?</span>
+                                                    <span class="icon" aria-hidden="true"></span>
+                                                    </button>
+                                                    <div class="accordion-content">
+                                                    <p>
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                                        incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut.
+                                                        Ut tortor pretium viverra suspendisse potenti.
+                                                    </p>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+ 
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
-                </div>
-                
             </div>
+            <p class="cp-text">
+                © Copyright 2024 Fusion Global Business Solutions . All rights reserved.
+            </p>
         </div>
-    </div>
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
             integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

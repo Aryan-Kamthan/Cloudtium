@@ -61,7 +61,7 @@ function displayCityInfo(data){
                 console.log("weather:",weatherData);
                 console.log("forecast:",forecastData);
                 console.log("airpollutin:",airPollutionData);
-                console.log("Search_history:", historyData);
+                console.log("historyData:", historyData);
                 
 
                 displayWeatherData(weatherData);
@@ -84,7 +84,21 @@ function searchByCityName(){
     fetch(geoLocationAPI)
     .then(response => response.json())
     .then(data =>{
-        displayCityInfo(data);
+        console.log("egi",data)
+        $("#search-result").html('');
+        if(data.length == 0){
+            $('#searchModal').modal('show');
+            let emptyDiv = document.createElement('div');
+            emptyDiv.innerHTML = `
+            Sorry cannot find this city
+            <hr />
+            `;
+            $("#search-result").append(emptyDiv);
+        }
+        else{
+            displayCityInfo(data);
+        }
+        
     })
     .catch(err =>{
         window.alert(err)
@@ -92,7 +106,7 @@ function searchByCityName(){
 }
 
 $(document).ready(function(){
-    clock();
+    // clock();
     fetchWeatherData();
     $("#search-city").keypress(function(event){
         if(event.keyCode === 13){
@@ -266,6 +280,7 @@ function displayWeatherData(weatherData){
     $(".visibility").html(`${Number(weatherData.current.visibility)/1000} <em>km</em>`);
 // UV section start
     let uvValue = Number(weatherData.current.uvi);
+   
     $(".uvindex").html(`${uvValue} <em>UV</em>`);
     let uvindexValue = ((uvValue * 15) -180);
     $("#uvIndexProjection").html(`<div id="bar" class="circle" style="transform: rotate(${uvindexValue}deg);"></div>`)
@@ -301,7 +316,7 @@ function displayWeatherData(weatherData){
 }
 
 function displayAirData(airData){
-    let airValue = airData.list[0].main.aqi;
+    let airValue = airData.list[0].components.o3.toFixed(0);
     let airColor = displayAirColor(airValue);
     $("#airColor").html(`<span class="air-color me-2" style="background:${airColor}" id="airColor"></span>`)
     $("#airQuality").html(`<p class="mb-0 d-flex align-items-center" id="airQuality">${airValue}</p>`)
@@ -328,6 +343,8 @@ function displayForecast(data){
 
         let temp_max = (Number(forecast.main.temp_max) -273.15).toFixed(0);
         let temp_min = (Number(forecast.main.temp_min) -273.15).toFixed(0);
+        let description = forecast.weather[0].description;
+        // console.log("foredesc:",description);
 
         let humidity = forecast.main.humidity;
         let feelsLike = (Number(forecast.main.feels_like) -273.15).toFixed(0);
@@ -335,37 +352,37 @@ function displayForecast(data){
         let visible = (Number(forecast.visibility)/1000).toFixed(0);
 
         $("#forecast").append(` <div class="col-xl col-sm-4 col-6">
-                                    <div class="forcast-box">
+                                    <div class="forcast-box" style ="height:80vh;">
                                         <div class="weather-icon">
                                             <div class="weather-img">
                                                 <img src="images/weather-icon/${weatherIcon}" alt="">
                                             </div>
                                         </div>
-                                        <div class="date-time" style="text-align: center;">
+                                        <div class="22-type pt-2 weather-type text-center weather-desc" style = "margin-bottom:40px;">
+                                            <p>${description}</p>
+                                        </div>
+                                        <div class="date-time" style="text-align: center; margin-bottom:30px;">
                                             <p>${dayOfMonth} ${month}</p>
                                             <span>${dayOfWeeks}</span>
                                         </div>
                                         <div class="temp d-flex justify-content-center align-items-end">
                                             <div class="max-temp">
-                                                <p class="mb-0">${temp_max}°</p>
-                                            </div>
-                                            <div class="min-temp">
-                                                <p class="mb-0">/ ${temp_min}°</p>
+                                                <p class="mb-0">${temp_max}° <em style="opacity:0.5; font-size:16px; font-style:normal;">C</em></p>
                                             </div>
                                         </div>
-                                        <div class="highlights">
+                                        <div class="highlights" style = "padding:30px;">
                                             <div class="row g-0">
-                                                <div class="col-7 highlights-text d-flex align-items-center">
+                                                <div class="col-7 highlights-text d-flex align-items-center"style = "margin-bottom:20px;">
                                                     <div>
                                                         <img src="images/forcast/humidity-ico.svg" alt="">
                                                     </div>
                                                     <p class="mb-0">${humidity} <em>%</em></p>
                                                 </div>
-                                                <div class="col-5 highlights-text d-flex align-items-center">
+                                                <div class="col-5 highlights-text d-flex align-items-center"style = "margin-bottom:20px;">
                                                     <div>
                                                         <img src="images/forcast/feels-ico.svg" alt="">
                                                     </div>
-                                                    <p class="mb-0">${feelsLike}°</p>
+                                                    <p class="mb-0">${feelsLike}° <em>C</em></p>
                                                 </div>
                                                 <div class="col-7 highlights-text d-flex align-items-center">
                                                     <div>
@@ -398,56 +415,80 @@ function displayHistory(data){
         const dayOfWeeks = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][date.getDay()];
         let month = date.toLocaleDateString('default',{month:'long'});
         let dayOfMonth = date.getDate();
-        let icon = history.day.condition.icon;
+        // let icon = history.day.condition.icon;
         // let weatherIcon = getImage(icon);
+
+        let description = history.day.condition.text;
 
         let temp_max = (Number(history.day.maxtemp_c)).toFixed(0);
         let temp_min = (Number(history.day.mintemp_c)).toFixed(0);
 
         let humidity = history.day.avghumidity;
-        // let feelsLike = (Number(forecast.main.feels_like) -273.15).toFixed(0);
-        let windSpeed = (Number(history.day.maxwind_kph)).toFixed(1);
+        let feelsLike = (Number(history.hour[12].feelslike_c)).toFixed(0);
+        let windSpeed = (Number(history.day.maxwind_kph)).toFixed(0);
         let visible = (Number(history.day.avgvis_km)).toFixed(0);
+        let sunrise = history.astro.sunrise;
+        let sunset = history.astro.sunset;
 
 
         $("#history").append(` <div class="col-xl col-sm-4 col-6">
-            <div class="history-box">
-                <div class="weather-icon">
-                    <div class="weather-img">
-                        <img src="images/weather-icon/${icon}" alt="">
-                    </div>
-                </div>
-                <div class="date-time">
+            <div class="history-box" style = "height:80vh;">
+                <div class="date-time" style="padding-top: 20px; margin-top:20px; margin-bottom:20px;">
                     <p>${dayOfMonth} ${month}</p>
                     <span>${dayOfWeeks}</span>
                 </div>
-                <div class="temp d-flex justify-content-center align-items-end">
+                <div class="temp d-flex justify-content-center align-items-end" style ="margin-top:20px; margin-bottom:20px;">
                     <div class="max-temp">
-                        <p class="mb-0">${temp_max}°</p>
+                        <p class="mb-0">${temp_max}° C </p>
                     </div>
                     <div class="min-temp">
-                        <p class="mb-0">/ ${temp_min}°</p>
+                        <p class="mb-0"> / ${temp_min}° C</p>
                     </div>
                 </div>
+
+                <div class="22-type pt-2 weather-type text-center style="margin-bottom:20px;">
+                           <p> ${description}</p>
+                </div>
+
                 <div class="highlights">
                     <div class="row g-0">
-                        <div class="col-7 highlights-text d-flex align-items-center">
+                        <div class="col-7 highlights-text d-flex align-items-center" style="margin-bottom:25px">
                             <div>
                                 <img src="images/forcast/humidity-ico.svg" alt="">
                             </div>
-                            <p class="mb-0">${humidity} <em>%</em></p>
+                            <p class="mb-10">${humidity} <em>%</em></p>
                         </div>
-                        <div class="col-7 highlights-text d-flex align-items-center">
+
+                        <div class="col-5 highlights-text d-flex align-items-center" style="margin-bottom:25px">
+                            <div>
+                                <img src="images/forcast/feels-ico.svg" alt="">
+                            </div>
+                            <p class="mb-0">${feelsLike}° <em> C</em></p> 
+                        </div>
+
+                        <div class="col-7 highlights-text d-flex align-items-center" style="margin-bottom:25px">
                             <div>
                                 <img src="images/forcast/wind-ico.svg" alt="">
                             </div>
                             <p class="mb-0">${windSpeed} <em> km/h</em></p> 
                         </div>
-                        <div class="col-5 highlights-text d-flex align-items-center">
+                        <div class="col-5 highlights-text d-flex align-items-center" style="margin-bottom:25px">
                             <div>
                                 <img src="images/forcast/visibility-ico.svg" alt="">
                             </div>
                             <p class="mb-0">${visible}<em>km</em></p>
+                        </div>
+                        <div class="col-7 highlights-text d-flex align-items-center" style="margin-bottom:20px">
+                            <div>
+                                <img src="images/sunrise.svg" alt="" style="color:red">
+                            </div>
+                            <p class="mb-0"><em> ${sunrise}  </em></p> 
+                        </div>
+                        <div class="col-5 highlights-text d-flex align-items-center" style="margin-bottom:20px">
+                            <div>
+                                <img src="images/sunset.svg" alt="">
+                            </div>
+                            <p class="mb-0"><em>${sunset}</em></p>
                         </div>
                     </div>
                 </div>
@@ -455,3 +496,22 @@ function displayHistory(data){
         </div>`);
     }
 }
+
+
+
+const items = document.querySelectorAll('.accordion button');
+
+function toggleAccordion() {
+  const itemToggle = this.getAttribute('aria-expanded');
+
+  for (let i = 0; i < items.length; i++) {
+    items[i].setAttribute('aria-expanded', 'false');
+  }
+
+  if (itemToggle == 'false') {
+    this.setAttribute('aria-expanded', 'true');
+  }
+}
+
+items.forEach((item) => item.addEventListener('click', toggleAccordion));
+
