@@ -91,6 +91,75 @@ header .search .form-control {
   padding-left: 67px;
 }
 
+.temp-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  gap: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#celsius, #fahrenheit {
+  font-size: 18px;
+  cursor: pointer;
+  color: aliceblue;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #555;
+  border-radius: 34px;
+  transition: 0.4s;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 2px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+.content {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.content h2 {
+  font-size: 24px;
+}
+
 .main-wrapper {
   height: 100%;
 }
@@ -563,6 +632,65 @@ h6 {
   display: inline-block;
   margin-left: 5px;
 }
+
+/* Style for the dropdown container */
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Label for the dropdown */
+.dropdown-label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #1d4e89;
+  margin-bottom: 8px;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  width: 200px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #1d4e89;
+  background-color: #eef3fc;
+  color: #1d4e89;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Dropdown hover effect */
+.dropdown-menu:hover {
+  background-color: #d0e4f7;
+}
+
+/* Dropdown focus (when it's clicked or in focus) */
+.dropdown-menu:focus {
+  outline: none;
+  box-shadow: 0 0 5px 2px rgba(29, 78, 137, 0.4);
+}
+
+/* Option styling (for aesthetics across all browsers) */
+.dropdown-menu option {
+  background-color: #eef3fc;
+  color: #1d4e89;
+}
+
+/* Style the canvas area */
+/* canvas {
+  display: block;
+  margin: 20px auto;
+  /* border: 1px dashed #ccc; */
+  /* border-radius: 5px;
+  max-width: 100%;
+} */ */
+
+
 .main-content.history .history-box {
   background: transparent;
   -webkit-backdrop-filter: blur(50px);
@@ -653,6 +781,27 @@ h6 {
 }
 
 
+/* Export starts *//* Export starts *//* Export starts *//* Export starts *//* Export starts */
+
+.btn{
+  width: 10%;
+  font-size: 10px;
+  background-color: greenyellow;
+  color: blue;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 500px;
+  margin-top: 50px;
+
+}
+
+
+/* Export ends */
+/* FAQ starts *//* FAQ starts *//* FAQ starts *//* FAQ starts *//* FAQ starts *//* FAQ starts *//* FAQ starts */
 .container {
   margin: 0 auto;
   padding: 4rem;
@@ -661,7 +810,7 @@ h6 {
 
 .accordion .accordion-item {
   border-bottom: 1px solid #e5e5e5;
-  background-color: #38142c;
+  background-color: #38152a;
 }
 
 .accordion .accordion-item button[aria-expanded='true'] {
@@ -756,5 +905,4 @@ h6 {
   margin: 2em 0;
   color: #fff;
 }
-
 /*# sourceMappingURL=main.css.map */

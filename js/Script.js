@@ -14,6 +14,7 @@ const part = 'hourly,daily,minutely'
             };
 
 
+
 function displayCityInfo(data){
     $("#search-result").html('');
     $('#searchModal').modal('show');
@@ -84,7 +85,6 @@ function searchByCityName(){
     fetch(geoLocationAPI)
     .then(response => response.json())
     .then(data =>{
-        console.log("egi",data)
         $("#search-result").html('');
         if(data.length == 0){
             $('#searchModal').modal('show');
@@ -105,14 +105,40 @@ function searchByCityName(){
     });
 }
 
+function validateInput(input) {
+    // Regular expression to allow only letters, numbers, spaces, and common safe symbols
+    console.log(input)
+    const regex = /[a-zA-Z]*/;
+    
+    if ( regex.test(input)) {
+        console.log("Input is safe");
+        return true;
+    } else {
+        console.log("Input contains potentially dangerous characters");
+        return false;
+    }
+}
+
+const searchInput = document.getElementById('search-city').value;
+$("#search-city").keypress(function(event){
+        if(event.keyCode === 13){
+            if (validateInput(searchInput)) {
+            searchByCityName();
+            }
+        else {
+            // Reject input
+            alert('Invalid characters detected in input');
+        }
+    }
+});
+    
+
+
+
+
 $(document).ready(function(){
     // clock();
     fetchWeatherData();
-    $("#search-city").keypress(function(event){
-        if(event.keyCode === 13){
-            searchByCityName();
-        }
-    });
 });
 
 
@@ -242,12 +268,12 @@ function fetchWeatherData(){
                 displayForecast(forecastData);
                 displayHistory(historyData);
 
+                
+
             })
             .catch(error=>{
                 console.error(error);
             });
-        
-
         });
     }
     else{
@@ -255,9 +281,216 @@ function fetchWeatherData(){
     }
 }
 
+
+// Export Historical Export Historical Export HistoricalExport Historical
+
+function startHistoryDownload(input){
+    const blob = new Blob([input],{type:'application/csv'});
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+        a.download = 'historicalData-csv.csv';
+        a.href = url;
+        a.style.display = 'none';
+
+        document.body.appendChild(a);
+
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+}
+
+const exportHistory = document.getElementById('exportHistory');
+exportHistory.addEventListener('click',exportHistoryHandle);
+
+
+function handleHistory(data) {
+    data = data.forecast.forecastday;
+    let csvRows = [];
+    // Step 1: Extract headers
+    const headers = new Set();
+
+    // Step 2: Flatten the JSON structure
+    data.forEach(entry => {
+        let row = {};
+        let stack = [entry];
+
+        while (stack.length) {
+            let current = stack.pop();
+
+            for (let key in current) {
+                let value = current[key];
+
+                if (Array.isArray(value)) {
+                    value.forEach(item => {
+                        if (typeof item === 'object' && item !== null) {
+                            stack.push(item);
+                        } else {
+                            row[key] = row[key] || [];
+                            row[key].push(item.toString());
+                        }
+                    });
+                } else if (typeof value === 'object' && value !== null) {
+                    stack.push(value);
+                } else {
+                    row[key] = value.toString();
+                }
+            }
+        }
+
+        // Add row values to csvRows
+        csvRows.push(row);
+        Object.keys(row).forEach(header => headers.add(header));
+    });
+
+    // Step 3: Create header row
+    csvRows.unshift(Array.from(headers));
+
+    // Step 4: Convert to CSV format
+    csvRows = csvRows.map(row => {
+        return Object.values(row).map(value => 
+            Array.isArray(value) ? value.join('|') : value // Join array values with a delimiter
+        ).join(',');
+    });
+
+    console.log(csvRows.join('\n'));
+    startHistoryDownload(csvRows.join('\n'))
+}
+
+
+
+function exportHistoryHandle(){
+
+    var cityname = $("#search-city").val()||'Indore';
+    var today = new Date();
+    var startDate = new Date(new Date().setDate(today.getDate() - 8));
+    let begin = startDate.toISOString().split('T')[0];
+    var endDate = new Date(new Date().setDate(today.getDate() - 1));
+    let end = endDate.toISOString().split('T')[0];
+
+
+
+    const Historyurl = `https://weatherapi-com.p.rapidapi.com/history.json?q=${cityname}&lang=en&dt=${begin}&end_dt=${end}`;
+    fetch(Historyurl,options)
+    .then(res => res.json())
+    .then(data => handleHistory(data))
+
+}
+
+// Export Forecast Export ForecastExport ForecastExport ForecastExport ForecastExport Forecast
+const exportForecast = document.getElementById('exportForecast');
+exportForecast.addEventListener('click',exportForecastHandle);
+
+function startForecastDownload(input){
+    const blob = new Blob([input],{type:'application/csv'});
+    const url = URL.createObjectURL(blob);
+    
+   
+    const a = document.createElement('a');
+        a.download = 'forecast-csv.csv';
+        a.href = url;
+        a.style.display = 'none';
+
+        document.body.appendChild(a);
+
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+
+}
+
+function handleForecast(data) {
+    data = data.list;
+    let csvRows = [];
+    // Step 1: Extract headers
+    const headers = new Set();
+
+    // Step 2: Flatten the JSON structure
+    data.forEach(entry => {
+        let row = {};
+        let stack = [entry];
+
+        while (stack.length) {
+            let current = stack.pop();
+
+            for (let key in current) {
+                let value = current[key];
+
+                if (Array.isArray(value)) {
+                    value.forEach(item => {
+                        if (typeof item === 'object' && item !== null) {
+                            stack.push(item);
+                        } else {
+                            row[key] = row[key] || [];
+                            row[key].push(item.toString());
+                        }
+                    });
+                } else if (typeof value === 'object' && value !== null) {
+                    stack.push(value);
+                } else {
+                    row[key] = value.toString();
+                }
+            }
+        }
+
+        // Add row values to csvRows
+        csvRows.push(row);
+        Object.keys(row).forEach(header => headers.add(header));
+    });
+
+    // Step 3: Create header row
+    csvRows.unshift(Array.from(headers));
+
+    // Step 4: Convert to CSV format
+    csvRows = csvRows.map(row => {
+        return Object.values(row).map(value => 
+            Array.isArray(value) ? value.join('|') : value // Join array values with a delimiter
+        ).join(',');
+    });
+
+    startForecastDownload(csvRows.join('\n'));
+}
+
+
+
+
+function exportForecastHandle()
+{
+    if(navigator.geolocation){
+           navigator.geolocation.getCurrentPosition(position =>{
+            // console.log("position:",position);
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            var today = new Date();
+            var startDate = new Date(new Date().setDate(today.getDate() - 5));
+            let begin = startDate.toISOString().split('T')[0];
+            var endDate = new Date(new Date().setDate(today.getDate() - 1));
+            let end = endDate.toISOString().split('T')[0];
+
+            let apiURLForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKey}`;
+            fetch(apiURLForecast)
+            .then(res => res.json())
+            .then(data => handleForecast(data))
+        });
+    }
+    else{
+        windows.alert("Google Navigation not supported by this browser");
+    }
+    
+}
+
+// Export Forecast ends ends ends ends ends ends ends ends ends ends ends
+
+
+
+    
+
 function displayWeatherData(weatherData){
-    let temprature = (Number(weatherData.current.temp) - 273.15).toFixed(1);
-    let feelslike = (Number(weatherData.current.feels_like) - 273.15).toFixed(1);
+    let curr_temprature = (Number(weatherData.current.temp) - 273.15).toFixed(1);
+    // console.log(curr_temprature);
+   
+    let curr_feelslike = (Number(weatherData.current.feels_like) - 273.15).toFixed(1);
+
 
     // Description and icons section
     let description = weatherData.current.weather[0].description;
@@ -274,8 +507,9 @@ function displayWeatherData(weatherData){
 
     // Description and icons section ends
 
-    $(".weather-temp p").text(temprature);
-    $(".feelslike").text(feelslike);
+    $(".weather-temp p").text(curr_temprature);
+    
+    $(".feelslike").text(curr_feelslike);
     $(".humidity").html(`${Number(weatherData.current.humidity)} <em>%</em>`);
     $(".visibility").html(`${Number(weatherData.current.visibility)/1000} <em>km</em>`);
 // UV section start
@@ -311,6 +545,8 @@ function displayWeatherData(weatherData){
 // Sun Section end
 
     $(".windspeed").html(`${(Number(weatherData.current.wind_speed) *1.609).toFixed(1)} <em>km/h</em>`);
+
+    
     
 
 }
@@ -341,7 +577,7 @@ function displayForecast(data){
         let icon = forecast.weather[0].icon;
         let weatherIcon = getImage(icon);
 
-        let temp_max = (Number(forecast.main.temp_max) -273.15).toFixed(0);
+        let temp_max = (Number(forecast.main.temp_max) -273.15).toFixed(1);
         let temp_min = (Number(forecast.main.temp_min) -273.15).toFixed(0);
         let description = forecast.weather[0].description;
         // console.log("foredesc:",description);
@@ -367,7 +603,7 @@ function displayForecast(data){
                                         </div>
                                         <div class="temp d-flex justify-content-center align-items-end">
                                             <div class="max-temp">
-                                                <p class="mb-0">${temp_max}° <em style="opacity:0.5; font-size:16px; font-style:normal;">C</em></p>
+                                                <p class="mb-0 changeU"> ${temp_max}°<em style="opacity:0.5; font-size:16px; font-style:normal;">C</em></p>
                                             </div>
                                         </div>
                                         <div class="highlights" style = "padding:30px;">
@@ -382,7 +618,7 @@ function displayForecast(data){
                                                     <div>
                                                         <img src="images/forcast/feels-ico.svg" alt="">
                                                     </div>
-                                                    <p class="mb-0">${feelsLike}° <em>C</em></p>
+                                                    <p class="mb-0 changeU">${feelsLike}° <em>C</em></p>
                                                 </div>
                                                 <div class="col-7 highlights-text d-flex align-items-center">
                                                     <div>
@@ -400,8 +636,9 @@ function displayForecast(data){
                                         </div>
                                     </div>
                                 </div>`);
+                                
     }
-
+    
 }
 
 function displayHistory(data){
@@ -439,10 +676,10 @@ function displayHistory(data){
                 </div>
                 <div class="temp d-flex justify-content-center align-items-end" style ="margin-top:20px; margin-bottom:20px;">
                     <div class="max-temp">
-                        <p class="mb-0">${temp_max}° C </p>
+                        <p class="mb-0 changeU">${temp_max}° C </p>
                     </div>
                     <div class="min-temp">
-                        <p class="mb-0"> / ${temp_min}° C</p>
+                        <p class="mb-0 changeU"> / ${temp_min}° C</p>
                     </div>
                 </div>
 
@@ -463,7 +700,7 @@ function displayHistory(data){
                             <div>
                                 <img src="images/forcast/feels-ico.svg" alt="">
                             </div>
-                            <p class="mb-0">${feelsLike}° <em> C</em></p> 
+                            <p class="mb-0 changeU">${feelsLike}° <em> C</em></p> 
                         </div>
 
                         <div class="col-7 highlights-text d-flex align-items-center" style="margin-bottom:25px">
@@ -497,7 +734,204 @@ function displayHistory(data){
     }
 }
 
+// Toggle Temp
+const toggle = document.getElementById("toggleTemp");
+const temperatureDisplays = document.querySelectorAll('.changeU');
 
+toggle.addEventListener('change', () => {
+    temperatureDisplays.forEach(tempDisplay => {
+        const currentTemp = tempDisplay.textContent;
+
+        if (toggle.checked) {
+            // Convert to Fahrenheit
+            const celsiusValue = parseFloat(currentTemp);
+            const fahrenheitValue = (celsiusValue * 9/5) + 32;
+            tempDisplay.textContent = `${fahrenheitValue.toFixed(1)}°F`;
+        } else {
+            // Convert to Celsius
+            const fahrenheitValue = parseFloat(currentTemp);
+            const celsiusValue = (fahrenheitValue - 32) * 5/9;
+            tempDisplay.textContent = `${celsiusValue.toFixed(1)}°C`;
+        }
+    });
+});
+
+
+// Plot starts
+function searchCityNameLatLon(){
+    var cityname = $("#search-city").val()||'Indore';
+    const geoLocationAPI = `http://api.openweathermap.org/geo/1.0/direct?q=${cityname}&limit=5&appid=${APIKey}`;
+    fetch(geoLocationAPI)
+    .then(response => response.json())
+    .then(data =>{
+        console.log("Data:", data);
+        if(data.length == 0){
+            myChart.destroy();
+        }
+        else{
+            var lat = data[0].lat;
+            var lon = data[0].lon;
+            console.log("fdggfd",lat);
+            console.log("fdggfd",lat);
+            return {lat, lon};
+        }
+        
+    })
+    .catch(err =>{
+        window.alert(err)
+    });
+}
+
+window.onload = function() {
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(position =>{
+         // console.log("position:",position);
+         const lat = position.coords.latitude;
+         const lon = position.coords.longitude;
+         var today = new Date();
+         var startDate = new Date(new Date().setDate(today.getDate() - 5));
+         let begin = startDate.toISOString().split('T')[0];
+         var endDate = new Date(new Date().setDate(today.getDate() - 1));
+         let end = endDate.toISOString().split('T')[0];
+    
+        
+        const apiEndpoint = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKey}`;
+ 
+        const dateDropdown = document.getElementById('dateDropdown');
+        let myChart; // Declare the chart variable globally to be reused
+
+        // Function to get the next five dates
+        function getNextFiveDates() {
+            const dates = [];
+            const currentDate = new Date();
+
+            // Loop to get the next 5 days
+            for (let i = 1; i <= 5; i++) {
+                const futureDate = new Date(currentDate);
+                futureDate.setDate(currentDate.getDate() + i); // Increment the date
+                const formattedDate = futureDate.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+                dates.push(formattedDate);
+            }
+
+            return dates;
+        }
+
+        // Populate dropdown with the next five dates
+        function populateDropdown() {
+            const dates = getNextFiveDates();
+            dates.forEach(date => {
+                const option = document.createElement('option');
+                option.value = date;
+                option.text = date;
+                dateDropdown.appendChild(option);
+            });
+        }
+
+        // Fetch data from the API and plot the chart based on the selected date
+        async function fetchData(targetDate) {
+            try {
+                const response = await fetch(apiEndpoint);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                let data = await response.json();
+                data = data.list;
+
+                // Check if data is an array, if not convert it to an array
+                if (!Array.isArray(data)) {
+                    console.warn('Data is not an array. Converting to array format.');
+                    data = Object.values(data); // Convert object values to an array
+                }
+
+                // Filter data for the selected day
+                const filteredData = data.filter(item => item.dt_txt.startsWith(targetDate));
+
+                // Check if there is data for the specified date
+                if (filteredData.length === 0) {
+                    console.warn(`No data found for the date: ${targetDate}`);
+                    return; // Exit if no data for the specified date
+                }
+
+                // Extracting only the time part from dt_txt for the x-axis
+                const labels = filteredData.map(item => item.dt_txt.split(" ")[1]); // Getting only the time for the x-axis
+                const temperatures = filteredData.map(item => {
+                    return (item.main.temp - 273.15).toFixed(1); // Convert to Celsius
+                }); // Getting the temperature for the y-axis in Celsius
+
+                // If chart already exists, destroy it before creating a new one
+                if (myChart) {
+                    myChart.destroy();
+                }
+
+                plotChart(labels, temperatures);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Plot the chart
+        function plotChart(labels, values) {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels, // Time labels on the x-axis
+                    datasets: [{
+                        label: 'Temperature (°C) Over Time',
+                        data: values,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderWidth: 2,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Temperature (°C)' // Specify the unit of measurement
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Time'
+                            },
+                            ticks: {
+                                autoSkip: false // Ensures all labels are shown on the x-axis
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Populate the dropdown on page load
+        populateDropdown();
+
+        // Fetch and plot data for the initial selected date (first option in dropdown)
+        fetchData(dateDropdown.value);
+
+        // Event listener to update the graph when the user selects a new date
+        dateDropdown.addEventListener('change', function() {
+        const selectedDate = dateDropdown.value;
+        console.log('Selected Date:', selectedDate); // Console log the selected date
+        fetchData(selectedDate); // Fetch and update the graph based on the selected date
+    });
+});
+};
+}
+
+
+
+// Plot ends Plot endsPlot endsPlot endsPlot endsPlot endsPlot endsPlot endsPlot endsPlot endsPlot endsPlot endsPlot endsPlot endsPlot endsPlot endsPlot ends
+
+
+
+// FAQ
 
 const items = document.querySelectorAll('.accordion button');
 
@@ -514,4 +948,3 @@ function toggleAccordion() {
 }
 
 items.forEach((item) => item.addEventListener('click', toggleAccordion));
-
