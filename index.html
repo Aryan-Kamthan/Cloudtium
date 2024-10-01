@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>1111111111</title>
+        <title>Cloudium</title>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+        <script src="https://kit.fontawesome.com/7223c70e3c.js" crossorigin="anonymous"></script>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -45,7 +46,7 @@
                                 <li><a href=#city-dashboard class="hov">City Dashboard</a></li>
                                 <li><a href=#forecast1 class="hov">Forecastor</a></li>
                                 <li><a href=#history1 class="hov">Historical Data</a></li>
-                                <li><a href=#faq class="hov">FAQ</a></li>
+                                <li><a href=#FAQ1 class="hov">FAQ</a></li>
                                 <li><a href="https://www.fusiongbs.com/about-us/" target="_blank" class="hov">About</a></li>
                                 <a href="#" id="menu-icon"></a>
                                 </ul>
@@ -69,20 +70,7 @@
                                     <input type="search" name="search-city" id="search-city" class="form-control" placeholder="Search City..." pattern="[a-zA-Z]+" >
                                 </div>
                             </div>
-
-                           
-
                         </div>
-
-                        <div class="temp-toggle">
-                            <span id="celsius">°C</span>
-                            <label class="switch">
-                                <input type="checkbox" id="toggleTemp">
-                                <span class="slider"></span>
-                            </label>
-                            <span id="fahrenheit">°F</span>
-                        </div>
-
 
                     </header>
                     <div class="main-wrapper">
@@ -90,6 +78,14 @@
                             <div class="col-lg-4">
                                 <div class="current-weather" style="margin-bottom: 20px;">
                                     <img src="images/main-weather-bg.png" alt="" class="main-image">
+                                    <div class="temp-toggle">
+                                        <span id="celsius">°C</span>
+                                        <label class="switch">
+                                            <input type="checkbox" id="toggleTemp">
+                                            <span class="slider"></span>
+                                        </label>
+                                        <span id="fahrenheit">°F</span>
+                                    </div>
                                     <!-- <div class="search-date text-center">
                                         <p>
                                             <span class="day me-2">
@@ -177,7 +173,7 @@
                                     <div class="highlight-box">
                                         <div class="row g-3">
                                             <div class="col-xl-4">
-                                                <div class="highlight-content">
+                                                <div class="highlight-content" style="margin-bottom: 12%;">
                                                     <h5>Wind Status</h5>
                                                     <div style="margin-top: 100px;">
                                                         <img src="images/wind-icon.png" class="img-fluid" alt="">
@@ -290,17 +286,19 @@
                             </div>
                         </div>
 
+                        <div id="forecast1" style="margin: 5px;"></div>
+
                         <div class="row mt-4">
                             <div class="col-lg-8" style="width:100%;">
                                 <div class="main-content forcast">
                                     <img src="images/forcast-bg.png" alt="" class="main-image">
-                                    <h6 id="forecast1" style="text-align: end;">5 Days Forecast</h6>
+                                    <h6 style="text-align: center;">5 Days Forecast</h6>
                                     <div class="row g-2" id="forecast">
                                         
                                     </div>
                                     <div class="dropdown-container">
                                         <label for="dateDropdown" class="dropdown-label">Select Date:</label>
-                                        <select id="dateDropdown" lass="dropdown-menu"></select>>
+                                        <select id="dateDropdown" class="dropdown-menu"></select>>
                                         <!-- Dropdown will be dynamically populated -->
                                     </div>
                                     
@@ -310,133 +308,135 @@
                             </div>
                         </div>
 
+                        <div id="history1" style="margin: 5px;"></div>
+
                         <div class="row mt-4">
                             <div class="col-lg-8" style="width:100%;">
                                 <div class="main-content history">
                                     <img src="images/forcast-bg.png" alt="" class="main-image">
-                                    <h6 id="history1" style="text-align: end;">5 Days History</h6>
+                                    <h6  style="text-align: center;">5 Days History</h6>
                                         <div class="row g-2" id="history"></div>
                                         <button class="btn" id="exportHistory">Export Historical data</button>
                                 </div>
                             </div>
                         </div>
 
+                        <div id="FAQ1" style="margin: 5px;"></div>
                         
-                        
-
                         <div class="row mt-4">
                             <div class="col-lg-8" style="width:100%;">
                                 <div class="main-content FAQ">
                                     <img src="images/forcast-bg.png" alt="" class="main-image">
-                                    <h6 id="FAQ1" style="text-align: end;">Frequently Asked Questions</h6>
+                                    <h6 style="text-align: center;">Frequently Asked Questions</h6>
                                         <div class="row g-2" id="faq">
                                             <div class="container">
-                                                <h2>Frequently Asked Questions</h2>
                                                 <div class="accordion">
                                                 <div class="accordion-item">
-                                                    <button id="accordion-button-1" aria-expanded="false">
+                                                    <button id="accordion-button-1" aria-expanded="false" style="padding: 1em;">
                                                     <span class="accordion-title">What is UV Index??</span>
                                                     <span class="icon" aria-hidden="true"></span>
                                                     </button>
-                                                    <div class="accordion-content">
+                                                    <div class="accordion-content" style="padding: 1em;">
                                                     <p>
                                                        
-                                                        MMeasures sun's ultraviolet radiation intensity, affecting skin and health, on a scale of 0-12.
+                                                        Measures sun's ultraviolet radiation intensity, affecting skin and health, on a scale of 0-12.
                                                     </p>
                                                     </div>
                                                 </div>
                                                 <div class="accordion-item">
-                                                    <button id="accordion-button-2" aria-expanded="false">
+                                                    <button id="accordion-button-2" aria-expanded="false" style="padding: 1em;">
                                                     <span class="accordion-title">How is UV Index categorized?</span>
                                                     <span class="icon" aria-hidden="true"></span>
                                                     </button>
-                                                    <div class="accordion-content">
+                                                    <div class="accordion-content" style="padding: 1em;">
                                                     <p>
                                                         Low (0-1), Moderate (2-4), High (5-6), Very High (7-9), Extremely High (10+).
                                                     </p>
                                                     </div>
                                                 </div>
                                                 <div class="accordion-item">
-                                                    <button id="accordion-button-3" aria-expanded="false">
+                                                    <button id="accordion-button-3" aria-expanded="false" style="padding: 1em;">
                                                     <span class="accordion-title">What is AQI?</span>
                                                     <span class="icon" aria-hidden="true"></span>
                                                     </button>
-                                                    <div class="accordion-content">
+                                                    <div class="accordion-content" style="padding: 1em;">
                                                     <p>
                                                         Measures air pollution levels, indicating health risks and safety, on a scale of 0-500.
                                                     </p>
                                                     </div>
                                                 </div>
                                                 <div class="accordion-item">
-                                                    <button id="accordion-button-4" aria-expanded="false">
+                                                    <button id="accordion-button-4" aria-expanded="false" style="padding: 1em;">
                                                     <span class="accordion-title"> What pollutants affect AQI?</span>
                                                     <span class="icon" aria-hidden="true"></span>
                                                     </button>
-                                                    <div class="accordion-content">
+                                                    <div class="accordion-content" style="padding: 1em;">
                                                     <p>
                                                         Particulate Matter (PM2.5, PM10), Ozone (O3), Nitrogen Dioxide (NO2), Carbon Monoxide (CO), Sulfur Dioxide (SO2)
                                                     </p>
                                                     </div>
                                                 </div>
                                                 <div class="accordion-item">
-                                                    <button id="accordion-button-5" aria-expanded="false">
+                                                    <button id="accordion-button-5" aria-expanded="false" style="padding: 1em;">
                                                     <span class="accordion-title"> What is Particulate Matter (PM)?</span>
                                                     <span class="icon" aria-hidden="true"></span>
                                                     </button>
-                                                    <div class="accordion-content">
+                                                    <div class="accordion-content" style="padding: 1em;">
                                                     <p>
                                                         Tiny airborne particles (PM2.5, PM10) harming respiratory health, visibility, and climate.
                                                     </div>
                                                 </div>
                                                 <div class="accordion-item">
-                                                    <button id="accordion-button-5" aria-expanded="false">
+                                                    <button id="accordion-button-5" aria-expanded="false" style="padding: 1em;">
                                                     <span class="accordion-title">What is Ozone (O3) in air composition?</span>
                                                     <span class="icon" aria-hidden="true"></span>
                                                     </button>
-                                                    <div class="accordion-content">
+                                                    <div class="accordion-content" style="padding: 1em;">
                                                     <p>
                                                         Protects from UV radiation, but is harmful at ground level, causes respiratory issues.
                                                     </div>
                                                 </div>
                                                 <div class="accordion-item">
-                                                    <button id="accordion-button-5" aria-expanded="false">
-                                                    <span class="accordion-title">What is Ozone (O3) in air composition?</span>
+                                                    <button id="accordion-button-5" aria-expanded="false" style="padding: 1em;">
+                                                    <span class="accordion-title">How does NO3 affect the environment?</span>
                                                     <span class="icon" aria-hidden="true"></span>
                                                     </button>
-                                                    <div class="accordion-content">
+                                                    <div class="accordion-content" style="padding: 1em;">
                                                     <p>
-                                                        Protects from UV radiation, but is harmful at ground level, causes respiratory issues.
+                                                        The environmental impacts of nitrate pollution include ecological and amenity damage to our rivers, lakes and coasts; higher costs, 
+                                                        energy use and carbon emissions for drinking water treatment and long-term impacts for our groundwater.
                                                     </div>
                                                 </div>
                                                 <div class="accordion-item">
-                                                    <button id="accordion-button-5" aria-expanded="false">
+                                                    <button id="accordion-button-5" aria-expanded="false" style="padding: 1em;">
                                                     <span class="accordion-title">What is Nitrogen Dioxide (NO2) in air?</span>
                                                     <span class="icon" aria-hidden="true"></span>
                                                     </button>
-                                                    <div class="accordion-content">
+                                                    <div class="accordion-content" style="padding: 1em;">
                                                     <p>
                                                         Pollutant from fossil fuels, contributing to respiratory problems, acid rain, and smog.
                                                     </div>
                                                 </div>
                                                 <div class="accordion-item">
-                                                    <button id="accordion-button-5" aria-expanded="false">
+                                                    <button id="accordion-button-5" aria-expanded="false" style="padding: 1em;">
                                                     <span class="accordion-title">What is Carbon Monoxide (CO) in air?
                                                         </span>
                                                     <span class="icon" aria-hidden="true"></span>
                                                     </button>
-                                                    <div class="accordion-content">
+                                                    <div class="accordion-content" style="padding: 1em;">
                                                     <p>
                                                         Colorless, odorless gas from combustion, posing health risks, especially indoors.
                                                     </div>
                                                 </div>
                                                 <div class="accordion-item">
-                                                    <button id="accordion-button-5" aria-expanded="false">
+                                                    <button id="accordion-button-5" aria-expanded="false" style="padding: 1em;">
                                                     <span class="accordion-title">How is the "Feels Like" temperature calculated?</span>
                                                     <span class="icon" aria-hidden="true"></span>
                                                     </button>
-                                                    <div class="accordion-content">
+                                                    <div class="accordion-content" style="padding: 1em;">
                                                     <p>
-                                                        The "Feels Like" temperature combines air temperature, wind speed, humidity, and radiation to estimate the perceived temperature, using formulas like the Wind Chill Index or Heat Index.
+                                                        The "Feels Like" temperature combines air temperature, wind speed, humidity, and radiation to estimate the perceived temperature,
+                                                         using formulas like the Wind Chill Index or Heat Index.
                                                     </div>
                                                 </div>
                                                 </div>
@@ -450,9 +450,18 @@
 
                     </div>
             </div>
-            <p class="cp-text">
-                © Copyright 2024 Fusion Global Business Solutions . All rights reserved.
-            </p>
+            <footer class="footer" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
+                <div class="social" role="navigation" aria-labelledby="social-heading">
+                    <h3 id="social-heading" class="sr-only">Follow us on social media</h3>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+                <hr class="footer-break">
+                <p class="copyright">© 2024 Fusion Global Business Solution. <br> All Rights Reserved</p>
+            </footer>
+            
         </div>
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
