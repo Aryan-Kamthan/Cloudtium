@@ -241,6 +241,9 @@ input:checked + .slider::before {
   font-weight: 300;
   line-height: 42px;
 }
+.hide{
+  display: none !important;
+}
 .current-weather .weather-temp div span {
   font-family: "Oswald", sans-serif;
   font-size: 32px;

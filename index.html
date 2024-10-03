@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="search flex-grow-1">
                                     <img src="images/search-ico.svg" alt="search bar">
-                                    <input type="search" name="search-city" id="search-city" class="form-control" placeholder="Search City..." pattern="[a-zA-Z]+" >
+                                    <input type="search" name="search-city" id="search-city" class="form-control" placeholder="Search City..." pattern="[a-zA-Z]+" onkeydown="return /[a-z ]/i.test(event.key)" >
                                 </div>
                             </div>
                         </div>
@@ -103,10 +103,10 @@
                                     <div class="d-flex justify-content-between align-items-center pb-3">
                                         <div class="weather-temp d-flex align-items-start ">
                                             <p class="changeU">----</p>
-                                            <!-- <div>
+                                            <div class="myClass">
                                                 <em>°</em>
                                                 <span>C</span>
-                                            </div> -->
+                                            </div>
                                         </div>
                                         <div class="air-quality" style="margin-top: 20px;">
                                             <label for="">Air Quality<span class="air-color me-2" id="airColor"></span></label>
@@ -115,7 +115,7 @@
                                     </div>
                                     <div class="22-type pt-2 weather-type">
                                         <img src="images/weather-icon/thunderstorm-rain.svg" height="35px" >
-                                        Thunderstorm with heavy rain
+                                        
                                     </div>
                                     <div class="air-quality-vals">
                                         <p>Air Quality Index Values</p>
@@ -272,8 +272,10 @@
                                                     <div class="highlight-value d-flex justify-content-between">
                                                         <div class="d-flex align-items-start \">
                                                             <p class="feelslike changeU">----</p>
-                                                            <!-- <em>°</em>
-                                                            <span>C</span> -->
+                                                            <div class="myClass">
+                                                                <em>°</em>
+                                                                <span>C</span>
+                                                            </div>
                                                         </div>
                                                         <img src="images/feels-ico.svg" alt="">
                                                     </div>
@@ -297,7 +299,7 @@
                                         
                                     </div>
                                     <div class="dropdown-container">
-                                        <label for="dateDropdown" class="dropdown-label">Select Date:</label>
+                                        <label for="dateDropdown" class="dropdown-label">Select a Date to Plot:</label>
                                         <select id="dateDropdown" class="dropdown-menu"></select>>
                                         <!-- Dropdown will be dynamically populated -->
                                     </div>
@@ -453,13 +455,13 @@
             <footer class="footer" role="contentinfo" itemscope itemtype="http://schema.org/WPFooter">
                 <div class="social" role="navigation" aria-labelledby="social-heading">
                     <h3 id="social-heading" class="sr-only">Follow us on social media</h3>
-                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                   
+                    <a href="https://twitter.com/fusiongbs" aria-label="Twitter" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://www.youtube.com/@FusionGBS" target="_blank" aria-label="Instagram"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.linkedin.com/company/fusion-business-solutions/posts/?feedView=all" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
                 </div>
                 <hr class="footer-break">
-                <p class="copyright">© 2024 Fusion Global Business Solution. <br> All Rights Reserved</p>
+                <p class="copyright">© 2024 Fusion Global Business Solutions. <br> All Rights Reserved</p>
             </footer>
             
         </div>

@@ -737,10 +737,12 @@ function displayHistory(data){
 // Toggle Temp
 const toggle = document.getElementById("toggleTemp");
 const temperatureDisplays = document.querySelectorAll('.changeU');
+const elements = document.querySelectorAll('.myClass');
 
 toggle.addEventListener('change', () => {
     temperatureDisplays.forEach(tempDisplay => {
         const currentTemp = tempDisplay.textContent;
+        
 
         if (toggle.checked) {
             // Convert to Fahrenheit
@@ -753,6 +755,10 @@ toggle.addEventListener('change', () => {
             const celsiusValue = (fahrenheitValue - 32) * 5/9;
             tempDisplay.textContent = `${celsiusValue.toFixed(1)}°C`;
         }
+    });
+
+    elements.forEach(function(element){
+        element.classList.add('hide')
     });
 });
 
